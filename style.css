@@ -126,7 +126,7 @@ body{
 }
 .subtitle{
   margin:6px 0 0;
-  color:var(--muted);
+  color:var(--white);
   font-size:0.95rem;
 }
 
