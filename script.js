@@ -1,5 +1,9 @@
-const ADVENT_YEAR = 2025;       // Hier Jahr anpassen für nächsten Adventskalender
-const TEST_MODE = true;        // true = benutze TEST_DAY anstatt echtes Datum
+/* script.js
+   - Testmodus: TEST_MODE = true erlaubt das "Vorspulen"
+   - openedDoors wird in localStorage gespeichert (Array von Zahlen)
+*/
+
+const TEST_MODE = false;        // true = benutze TEST_DAY anstatt echtes Datum
 const TEST_DAY = 2;             // bis zu welchem Tag testweise geöffnet werden darf
 
 const calendar = document.getElementById('calendar');
@@ -13,13 +17,11 @@ const clearLocalBtn = document.getElementById('clearLocal');
 
 yearSpan.textContent = new Date().getFullYear();
 
-// Gespeicherte geöffneten Türen laden
+// Load opened doors from localStorage
 let openedDoors = JSON.parse(localStorage.getItem('openedDoors')) || [];
-
-// unique integers sicherstellen
 openedDoors = Array.from(new Set(openedDoors.map(n => Number(n)).filter(n => !isNaN(n))));
 
-// Teedaten laden und Kalender rendern
+// Load teas and render
 let teas = [];
 fetch('teas.json')
   .then(res => {
@@ -35,31 +37,38 @@ fetch('teas.json')
     calendar.innerHTML = '<p style="color:#6b6b6b">Fehler: teas.json konnte nicht geladen werden.</p>';
   });
 
-// Prüft ob das Datum mindestens 1. Dezember ADVENT_YEAR ist
-function isAtLeastDecember() {
-  const now = new Date();
-  if(now.getFullYear() < ADVENT_YEAR) return false;
-  if(now.getFullYear() === ADVENT_YEAR && now.getMonth() < 11) return false; // Monat 11 = Dezember
-  return true; // Ab Dezember ADVENT_YEAR (und später)
-}
+/* Prüft, ob ein Türchen geöffnet werden darf */
+function canOpen(day){
+  if(TEST_MODE) return day <= TEST_DAY; // Testmodus übersteuert alles
 
-// Prüft ob das Datum zwischen 1.12.ADVENT_YEAR und 24.12.ADVENT_YEAR liegt (inklusive)
-function isBetweenDec1And24() {
   const now = new Date();
-  return now.getFullYear() === ADVENT_YEAR && now.getMonth() === 11 && now.getDate() <= 24;
+  const currentYear = now.getFullYear();
+  const currentMonth = now.getMonth(); // 0 = Januar, 11 = Dezember
+  const currentDay = now.getDate();
+
+  const startMonth = 11; // Dezember
+  const startYear = 2025;
+
+  // Türchen ab 24. Dezember: immer offen
+  if(currentYear > startYear || (currentYear === startYear && currentMonth === startMonth && day >= 24)) {
+    return true;
+  }
+
+  // vor 1. Dezember: alle Türchen gesperrt
+  if(currentYear < startYear || (currentYear === startYear && currentMonth < startMonth)){
+    return false;
+  }
+
+  // ab 1. Dezember bis 23. Dezember: nur Tage <= heute offen
+  if(currentYear === startYear && currentMonth === startMonth){
+    return day <= currentDay;
+  }
+
+  // Default: gesperrt
+  return false;
 }
 
 function renderCalendar(){
-  // const allowed = TEST_MODE || isAtLeastDecember();
-
-  // if(!allowed){
-  //   calendar.innerHTML = `<p style="color:#6b6b6b; text-align:center;">Der Adventskalender ist erst ab Dezember ${ADVENT_YEAR} aktiv.</p>`;
-  //   return;
-  // }
-
-  const now = new Date();
-  const dayOfMonth = TEST_MODE ? TEST_DAY : now.getDate();
-
   calendar.innerHTML = '';
 
   for(let day = 1; day <= 24; day++){
@@ -69,18 +78,10 @@ function renderCalendar(){
     const tea = teas.find(t => Number(t.id) === day);
 
     const isOpened = openedDoors.includes(day);
-
-    // Bestimmen ob das Türchen geöffnet werden darf
-    // Alle Türchen sind sichtbar, aber nur "openable" wenn erlaubt
-    const isOpenable = TEST_MODE 
-      || (now.getFullYear() === ADVENT_YEAR && now.getMonth() === 11 && now.getDate() < 25 && day <= dayOfMonth)
-      || (now.getFullYear() > ADVENT_YEAR || (now.getFullYear() === ADVENT_YEAR && now.getMonth() > 11))
-      // Nach dem 24.12. alle offen
-      ;
+    const isOpenable = canOpen(day);
 
     if(isOpened){
       tile.classList.add('opened');
-
       if(tea && tea.image){
         const img = document.createElement('img');
         img.src = tea.image;
@@ -91,7 +92,6 @@ function renderCalendar(){
         label.classList.add('day-label');
         label.textContent = day;
         tile.appendChild(label);
-
       } else {
         tile.textContent = day;
       }
@@ -102,7 +102,6 @@ function renderCalendar(){
 
     } else {
       tile.textContent = day;
-
       if(!isOpenable){
         tile.classList.add('locked');
       } else {
@@ -116,31 +115,13 @@ function renderCalendar(){
 }
 
 function openDoor(day, tea){
-  const now = new Date();
-
-  // Prüfen ob Kalender ab 1.12.ADVENT_YEAR aktiv ist oder Testmodus
-  if(!TEST_MODE && !isAtLeastDecember()){
-    alert(`Der Adventskalender ist erst ab Dezember ${ADVENT_YEAR} aktiv.`);
+  if(!canOpen(day)){
+    alert('Dieses Türchen darf erst ab dem 1. Dezember geöffnet werden!');
     return;
   }
 
-  // Prüfen ob das Türchen geöffnet werden darf
-  if(!TEST_MODE){
-    if(now.getFullYear() === ADVENT_YEAR && now.getMonth() === 11 && now.getDate() < 25){
-      // vor dem 25.12.ADVENT_YEAR: Tür nur öffnen, wenn Tag <= aktueller Tag
-      if(day > now.getDate()){
-        alert('Dieses Türchen darf erst später geöffnet werden!');
-        return;
-      }
-    }
-    // nach dem 24.12. ist alles offen
-  }
-
-  if(tea) {
-    showTea(tea);
-  } else {
-    alert('Für dieses Türchen ist noch kein Tee definiert.');
-  }
+  if(tea) showTea(tea);
+  else alert('Für dieses Türchen ist noch kein Tee definiert.');
 
   if(!openedDoors.includes(day)){
     openedDoors.push(day);
