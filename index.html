@@ -1,21 +1,56 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tee Adventskalender</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Tee Adventskalender</h1>
-  <div id="calendar" class="calendar"></div>
+  <div class="page-bg">
+    <!-- Hintergrundbild (verschneite Landschaft) -->
+    <div class="background-image" aria-hidden="true"></div>
+    <!-- Schnee-Ebene: viele .flake-Elemente animiert -->
+    <div class="snow" aria-hidden="true">
+      <!-- 40 Schneeflocken (du kannst Anzahl anpassen) -->
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+    </div>
 
-  <div id="modal" class="modal hidden">
-    <div class="modal-content">
-      <h2 id="teaName"></h2>
-      <img id="teaImage" src="" alt="">
-      <p id="teaDescription"></p>
-      <button id="closeBtn">Schließen</button>
+    <header class="header">
+      <h1 class="title">Tee Adventskalender</h1>
+      <p class="subtitle">24 Tees – jeden Tag ein neues Türchen</p>
+    </header>
+
+    <main class="container">
+      <section id="calendar" class="calendar" aria-label="Adventskalender"></section>
+    </main>
+
+    <footer class="footer">
+      <small>© <span id="year"></span> Dein Tee-Adventskalender</small>
+      <div class="controls">
+        <button id="clearLocal" title="Debug: localStorage löschen" hidden>Reset (dev)</button>
+      </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-box" role="document">
+        <button id="modalClose" class="modal-close" aria-label="Schließen">&times;</button>
+        <div class="modal-content">
+          <h2 id="teaName" class="modal-title"></h2>
+          <img id="teaImage" class="modal-image" src="" alt="">
+          <p id="teaDescription" class="modal-desc"></p>
+        </div>
+      </div>
     </div>
   </div>
 

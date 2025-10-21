@@ -2,19 +2,39 @@
   {
     "id": 1,
     "name": "Grüner Jasmintee",
-    "image": "images/1.jpeg",
+    "image": "images/1.jpg",
     "description": "Ein blumiger grüner Tee mit feinem Jasminaroma."
   },
   {
     "id": 2,
-    "name": "Zimt-Schwarztee",
-    "image": "https://source.unsplash.com/400x300/?black-tea",
-    "description": "Ein kräftiger Schwarztee mit winterlichen Gewürzen."
+    "name": "Winterlicher Zimttee",
+    "image": "images/2.jpg",
+    "description": "Wärmender Schwarztee mit Zimt, Nelken und einem Hauch Orange."
   },
   {
     "id": 3,
     "name": "Pfefferminztee",
-    "image": "https://source.unsplash.com/400x300/?mint-tea",
-    "description": "Ein erfrischender Kräutertee mit feinem Mentholgeschmack."
+    "image": "images/3.jpg",
+    "description": "Erfrischender Kräutertee mit feinem Mentholgeschmack."
+  },
+  {
+    "id": 4,
+    "name": "Rooibos-Vanille",
+    "image": "images/4.jpg",
+    "description": "Milder Rooibos mit süßer Vanillenote — koffeinfrei."
+  },
+  {
+    "id": 5,
+    "name": "Zimtstern-Kräuter",
+    "image": "images/5.jpg",
+    "description": "Würziger Kräutertee mit Zimt und einem Hauch Sternanis."
+  },
+  {
+    "id": 6,
+    "name": "Fruchtiger Hibiskus",
+    "image": "images/6.jpg",
+    "description": "Erfrischende Mischung aus Hibiskus und getrockneten Früchten."
   }
+
+  /* Ergänze die Einträge bis id:24 mit deinen Beschreibungen und Bildern */
 ]
