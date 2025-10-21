@@ -2,7 +2,7 @@
    Basis / Reset
    ------------------------- */
 :root{
-  --green: #000000;
+  --green: #ffffff;
   --gold: #ffcc4d;
   --ice: #f0f7fb;
   --muted: #9aa5a0;
@@ -16,18 +16,6 @@ body{
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: linear-gradient(#eaf6ff, #fff);
   color:var(--green);
-}
-
-/* -------------------------
-   Footer
-   ------------------------- */
-.footer {
-  text-align: center;      /* horizontal zentriert */
-  color: var(--muted);     /* dezente Farbe passend zum Design */
-  padding: 12px 0;         /* Abstand nach oben/unten */
-  font-size: 0.9rem;       /* kleinere Schrift */
-  position: relative;      /* über Hintergrund, aber unter Modal */
-  z-index: 2;
 }
 
 /* -------------------------
