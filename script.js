@@ -128,13 +128,3 @@ modalClose.addEventListener('click', () => modal.classList.add('hidden'));
 modal.addEventListener('click', (e) => {
   if(e.target === modal) modal.classList.add('hidden');
 });
-
-// ----- DEV: optional Reset (hidden by default) -----
-// If you ever want a reset button while developing, unhide #clearLocal in index.html or here:
-clearLocalBtn.addEventListener('click', () => {
-  if(confirm('LocalStorage wirklich löschen? (öffnet alle Türchen zurück)')){
-    localStorage.removeItem('openedDoors');
-    openedDoors = [];
-    renderCalendar();
-  }
-});

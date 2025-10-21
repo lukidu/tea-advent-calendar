@@ -19,6 +19,18 @@ body{
 }
 
 /* -------------------------
+   Footer
+   ------------------------- */
+.footer {
+  text-align: center;      /* horizontal zentriert */
+  color: var(--muted);     /* dezente Farbe passend zum Design */
+  padding: 12px 0;         /* Abstand nach oben/unten */
+  font-size: 0.9rem;       /* kleinere Schrift */
+  position: relative;      /* über Hintergrund, aber unter Modal */
+  z-index: 2;
+}
+
+/* -------------------------
    Hintergrund & Schnee
    ------------------------- */
 .page-bg{
@@ -31,7 +43,7 @@ body{
 .background-image{
   position:absolute;
   inset:0;
-  background-image: url('images/bg.jpg'); /* dein Winterbild */
+  background-image: url('images/bg_V1.jpg'); /* dein Winterbild */
   background-size: cover;
   background-position: center;
   filter: blur(4px) brightness(0.9) saturate(0.9);
