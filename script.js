@@ -1,10 +1,10 @@
 /* script.js
    - Testmodus: TEST_MODE = true erlaubt das "Vorspulen"
-   - geöffnete Türen werden nur während der Session gespeichert
+   - openedDoors wird in localStorage gespeichert (Array von Zahlen)
 */
 
-const TEST_MODE = true;        // true = benutze TEST_DAY anstatt echtes Datum
-const TEST_DAY = 2;             // bis zu welchem Tag testweise geöffnet werden darf
+const TEST_MODE = false;        // true = benutze TEST_DAY anstatt echtes Datum
+const TEST_DAY = 10;             // bis zu welchem Tag testweise geöffnet werden darf
 
 const calendar = document.getElementById('calendar');
 const modal = document.getElementById('modal');
@@ -13,11 +13,13 @@ const teaName = document.getElementById('teaName');
 const teaImage = document.getElementById('teaImage');
 const teaDescription = document.getElementById('teaDescription');
 const yearSpan = document.getElementById('year');
+const clearLocalBtn = document.getElementById('clearLocal');
 
 yearSpan.textContent = new Date().getFullYear();
 
-// Geöffnete Türen nur für die Session
-let openedDoors = [];
+// Load opened doors from localStorage
+let openedDoors = JSON.parse(localStorage.getItem('openedDoors')) || [];
+openedDoors = Array.from(new Set(openedDoors.map(n => Number(n)).filter(n => !isNaN(n))));
 
 // Load teas and render
 let teas = [];
@@ -44,7 +46,7 @@ function canOpen(day){
   const currentMonth = now.getMonth(); // 0 = Januar, 11 = Dezember
   const currentDay = now.getDate();
 
-  const startMonth = 11; // Dezember
+  const startMonth = 9; // Dezember
   const startYear = 2025;
 
   // Türchen ab 24. Dezember: immer offen
@@ -123,6 +125,7 @@ function openDoor(day, tea){
 
   if(!openedDoors.includes(day)){
     openedDoors.push(day);
+    localStorage.setItem('openedDoors', JSON.stringify(openedDoors));
     renderCalendar();
   }
 }
