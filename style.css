@@ -20,18 +20,6 @@ body{
 }
 
 /* -------------------------
-   Footer
-   ------------------------- */
-.footer {
-  text-align: center;      /* horizontal zentriert */
-  color: var(--muted);     /* dezente Farbe passend zum Design */
-  padding: 12px 0;         /* Abstand nach oben/unten */
-  font-size: 0.9rem;       /* kleinere Schrift */
-  position: relative;      /* über Hintergrund, aber unter Modal */
-  z-index: 2;
-}
-
-/* -------------------------
    Hintergrund & Schnee
    ------------------------- */
 .page-bg{
