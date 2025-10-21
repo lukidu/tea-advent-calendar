@@ -1,20 +1,20 @@
 [
   {
     "id": 1,
-    "name": "Grüner Jasmintee",
+    "name": "Tee 1",
     "image": "images/1.jpeg",
-    "description": "Ein blumiger grüner Tee mit feinem Jasminaroma."
+    "description": "Beschreibung"
   },
   {
     "id": 2,
-    "name": "Winterlicher Zimttee",
+    "name": "Tee 2",
     "image": "images/2.jpeg",
-    "description": "Wärmender Schwarztee mit Zimt, Nelken und einem Hauch Orange."
+    "description": "Beschreibung"
   },
   {
     "id": 3,
-    "name": "Pfefferminztee",
+    "name": "Tee 3",
     "image": "images/3.jpeg",
-    "description": "Erfrischender Kräutertee mit feinem Mentholgeschmack."
+    "description": "Beschreibung"
   }
 ]

@@ -20,27 +20,6 @@ body{
 }
 
 /* -------------------------
-   Eigener Footer
-   ------------------------- */
-.custom-footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 10px;
-  color: var(--muted);
-  position: relative;
-  bottom: 0;
-  width: 100%;
-  margin-top: 40px;
-}
-
-/* sorgt dafür, dass Footer am Seitenende bleibt */
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* -------------------------
    Hintergrund & Schnee
    ------------------------- */
 .page-bg{
