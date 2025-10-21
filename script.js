@@ -50,12 +50,12 @@ function isBetweenDec1And24() {
 }
 
 function renderCalendar(){
-  const allowed = TEST_MODE || isAtLeastDecember();
+  // const allowed = TEST_MODE || isAtLeastDecember();
 
-  if(!allowed){
-    calendar.innerHTML = `<p style="color:#6b6b6b; text-align:center;">Der Adventskalender ist erst ab Dezember ${ADVENT_YEAR} aktiv.</p>`;
-    return;
-  }
+  // if(!allowed){
+  //   calendar.innerHTML = `<p style="color:#6b6b6b; text-align:center;">Der Adventskalender ist erst ab Dezember ${ADVENT_YEAR} aktiv.</p>`;
+  //   return;
+  // }
 
   const now = new Date();
   const dayOfMonth = TEST_MODE ? TEST_DAY : now.getDate();
@@ -71,11 +71,12 @@ function renderCalendar(){
     const isOpened = openedDoors.includes(day);
 
     // Bestimmen ob das Türchen geöffnet werden darf
-    // Wenn vor dem 25.12.ADVENT_YEAR -> nur bis aktueller Tag öffnbar
-    // Ab dem 25.12.ADVENT_YEAR sind alle Tage freigegeben
-    const isOpenable = (now.getFullYear() === ADVENT_YEAR && now.getMonth() === 11 && now.getDate() < 25) 
-                       ? day <= dayOfMonth 
-                       : true;
+    // Alle Türchen sind sichtbar, aber nur "openable" wenn erlaubt
+    const isOpenable = TEST_MODE 
+      || (now.getFullYear() === ADVENT_YEAR && now.getMonth() === 11 && now.getDate() < 25 && day <= dayOfMonth)
+      || (now.getFullYear() > ADVENT_YEAR || (now.getFullYear() === ADVENT_YEAR && now.getMonth() > 11))
+      // Nach dem 24.12. alle offen
+      ;
 
     if(isOpened){
       tile.classList.add('opened');
