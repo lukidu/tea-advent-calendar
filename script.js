@@ -1,5 +1,5 @@
 const ADVENT_YEAR = 2025;       // Hier Jahr anpassen für nächsten Adventskalender
-const TEST_MODE = false;        // true = benutze TEST_DAY anstatt echtes Datum
+const TEST_MODE = true;        // true = benutze TEST_DAY anstatt echtes Datum
 const TEST_DAY = 2;             // bis zu welchem Tag testweise geöffnet werden darf
 
 const calendar = document.getElementById('calendar');
