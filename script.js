@@ -38,29 +38,32 @@ fetch('teas.json')
   });
 
 /* Prüft, ob ein Türchen geöffnet werden darf */
-function canOpen(day){
-  if(TEST_MODE) return day <= TEST_DAY; // Testmodus übersteuert alles
+function canOpen(day) {
+  if (TEST_MODE) return day <= TEST_DAY; // Testmodus übersteuert alles
 
   const now = new Date();
   const currentYear = now.getFullYear();
   const currentMonth = now.getMonth(); // 0 = Januar, 11 = Dezember
   const currentDay = now.getDate();
 
-  const startMonth = 9; // Dezember
+  const startMonth = 9;
   const startYear = 2025;
 
-  // Türchen ab 24. Dezember: immer offen
-  if(currentYear > startYear || (currentYear === startYear && currentMonth === startMonth && day >= 24)) {
+  // Türchen ab 24.: immer offen
+  if (currentYear > startYear
+    || (currentYear === startYear && currentMonth > startMonth)
+    || (currentYear === startYear && currentMonth === startMonth && currentDay > 24)) {
     return true;
   }
 
-  // vor 1. Dezember: alle Türchen gesperrt
-  if(currentYear < startYear || (currentYear === startYear && currentMonth < startMonth)){
+  // Vor dem 1.: alle Türchen gesperrt
+  if (currentYear < startYear
+    || (currentYear === startYear && currentMonth < startMonth)) {
     return false;
   }
 
-  // ab 1. Dezember bis 23. Dezember: nur Tage <= heute offen
-  if(currentYear === startYear && currentMonth === startMonth){
+  // Vom 1. bis zum 24.: nur Türchen bis zum heutigen Datum offen
+  if (currentYear === startYear && currentMonth === startMonth) {
     return day <= currentDay;
   }
 
