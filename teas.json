@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Grüner Jasmintee",
+    "image": "images/1.jpeg",
+    "description": "Ein blumiger grüner Tee mit feinem Jasminaroma."
+  },
+  {
+    "id": 2,
+    "name": "Zimt-Schwarztee",
+    "image": "https://source.unsplash.com/400x300/?black-tea",
+    "description": "Ein kräftiger Schwarztee mit winterlichen Gewürzen."
+  },
+  {
+    "id": 3,
+    "name": "Pfefferminztee",
+    "image": "https://source.unsplash.com/400x300/?mint-tea",
+    "description": "Ein erfrischender Kräutertee mit feinem Mentholgeschmack."
+  }
+]
