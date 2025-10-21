@@ -46,7 +46,7 @@ function canOpen(day) {
   const currentMonth = now.getMonth(); // 0 = Januar, 11 = Dezember
   const currentDay = now.getDate();
 
-  const startMonth = 8;
+  const startMonth = 9;
   const startYear = 2025;
 
   // Türchen ab 24.: immer offen
@@ -80,7 +80,7 @@ function renderCalendar(){
 
     const tea = teas.find(t => Number(t.id) === day);
 
-    const isOpened = openedDoors.includes(day);
+    const isOpened = openedDoors.includes(day) && canOpen(day);
     const isOpenable = canOpen(day);
 
     if(isOpened){
