@@ -1,6 +1,6 @@
 /* script.js
    - Testmodus: TEST_MODE = true erlaubt das "Vorspulen"
-   - openedDoors wird in localStorage gespeichert (Array von Zahlen)
+   - geöffnete Türen werden nur während der Session gespeichert
 */
 
 const TEST_MODE = false;        // true = benutze TEST_DAY anstatt echtes Datum
@@ -13,13 +13,11 @@ const teaName = document.getElementById('teaName');
 const teaImage = document.getElementById('teaImage');
 const teaDescription = document.getElementById('teaDescription');
 const yearSpan = document.getElementById('year');
-const clearLocalBtn = document.getElementById('clearLocal');
 
 yearSpan.textContent = new Date().getFullYear();
 
-// Load opened doors from localStorage
-let openedDoors = JSON.parse(localStorage.getItem('openedDoors')) || [];
-openedDoors = Array.from(new Set(openedDoors.map(n => Number(n)).filter(n => !isNaN(n))));
+// Geöffnete Türen nur für die Session
+let openedDoors = [];
 
 // Load teas and render
 let teas = [];
@@ -125,7 +123,6 @@ function openDoor(day, tea){
 
   if(!openedDoors.includes(day)){
     openedDoors.push(day);
-    localStorage.setItem('openedDoors', JSON.stringify(openedDoors));
     renderCalendar();
   }
 }
