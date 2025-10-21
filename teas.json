@@ -2,19 +2,13 @@
   {
     "id": 1,
     "name": "Tee 1",
-    "image": "images/1.jpeg",
+    "image": "images/Tee01_V1.jpeg",
     "description": "Beschreibung"
   },
   {
     "id": 2,
     "name": "Tee 2",
-    "image": "images/2.jpeg",
-    "description": "Beschreibung"
-  },
-  {
-    "id": 3,
-    "name": "Tee 3",
-    "image": "images/3.jpeg",
+    "image": "images/Tee02_V1.jpeg",
     "description": "Beschreibung"
   }
 ]
