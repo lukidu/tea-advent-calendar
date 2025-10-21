@@ -4,7 +4,7 @@
 */
 
 const TEST_MODE = true;        // true = benutze TEST_DAY anstatt echtes Datum
-const TEST_DAY = 3;           // bis zu welchem Tag testweise geöffnet werden darf
+const TEST_DAY = 4;           // bis zu welchem Tag testweise geöffnet werden darf
 
 const calendar = document.getElementById('calendar');
 const modal = document.getElementById('modal');

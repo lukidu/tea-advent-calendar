@@ -2,7 +2,8 @@
    Basis / Reset
    ------------------------- */
 :root{
-  --green: #ffffff;
+  --white: #ffffff;
+  --black: #000000;
   --gold: #ffcc4d;
   --ice: #f0f7fb;
   --muted: #9aa5a0;
@@ -15,7 +16,7 @@ body{
   margin:0;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background: linear-gradient(#eaf6ff, #fff);
-  color:var(--green);
+  color:var(--white);
 }
 
 /* -------------------------
@@ -178,7 +179,7 @@ body{
 /* Openable (heute möglich) */
 .door.openable{
   background: linear-gradient(180deg,var(--gold), #f6b93b);
-  color:var(--green);
+  color:var(--black);
   cursor:pointer;
   box-shadow: 0 10px 20px rgba(255,204,77,0.18);
 }
@@ -278,7 +279,7 @@ body{
 
 .modal-title{
   margin:0;
-  color:var(--green);
+  color:var(--black);
   font-size:1.8rem;
 }
 
