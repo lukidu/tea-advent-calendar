@@ -1,59 +1,71 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tee Adventskalender</title>
-  <link rel="stylesheet" href="style.css" />
+  <!-- Stylesheet mit Versionierung -->
+  <link rel="stylesheet" href="style.css?v=1.0">
 </head>
 <body>
   <div class="page-bg">
-    <!-- Hintergrundbild (verschneite Landschaft) -->
-    <div class="background-image" aria-hidden="true"></div>
-    <!-- Schnee-Ebene: viele .flake-Elemente animiert -->
-    <div class="snow" aria-hidden="true">
-      <!-- 40 Schneeflocken (du kannst Anzahl anpassen) -->
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+    <!-- Hintergrundbild -->
+    <div class="background-image"></div>
+
+    <!-- Schnee -->
+    <div class="snow">
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
+      <div class="flake"></div>
     </div>
 
+    <!-- Header -->
     <header class="header">
       <h1 class="title">Tee Adventskalender</h1>
-      <p class="subtitle">24 Tees – jeden Tag ein neues Türchen</p>
+      <p class="subtitle">Öffne jeden Tag ein Türchen und entdecke neue Teesorten!</p>
     </header>
 
+    <!-- Main / Kalender -->
     <main class="container">
       <section id="calendar" class="calendar" aria-label="Adventskalender"></section>
     </main>
+  </div>
 
-    <footer class="footer">
-      <small>© <span id="year"></span> Dein Tee-Adventskalender</small>
-      <div class="controls">
-        <button id="clearLocal" title="Debug: localStorage löschen" hidden>Reset (dev)</button>
-      </div>
-    </footer>
-
-    <!-- Modal -->
-    <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
-      <div class="modal-box" role="document">
-        <button id="modalClose" class="modal-close" aria-label="Schließen">&times;</button>
-        <div class="modal-content">
-          <h2 id="teaName" class="modal-title"></h2>
-          <img id="teaImage" class="modal-image" src="" alt="">
-          <p id="teaDescription" class="modal-desc"></p>
-        </div>
+  <!-- Modal -->
+  <div class="modal hidden" id="modal">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-content">
+        <h2 class="modal-title" id="modalTitle">Tee Name</h2>
+        <img src="" alt="" class="modal-image" id="modalImage">
+        <p class="modal-desc" id="modalDesc">Beschreibung des Tees</p>
       </div>
     </div>
   </div>
 
-  <script src="script.js"></script>
+<!-- Footer -->
+<footer class="footer">
+  &copy; 2025 Lukas Tschannen
+</footer>
+
+  <!-- Script mit Versionierung -->
+  <script src="script.js?v=1.0" defer></script>
 </body>
 </html>

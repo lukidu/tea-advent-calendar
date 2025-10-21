@@ -1,7 +1,6 @@
 /* script.js
    - Testmodus: TEST_MODE = true erlaubt das "Vorspulen"
    - openedDoors wird in localStorage gespeichert (Array von Zahlen)
-   - Bilder: teas.json -> image: "images/1.jpg" (relative Pfade)
 */
 
 const TEST_MODE = true;        // true = benutze TEST_DAY anstatt echtes Datum
