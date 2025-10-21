@@ -47,7 +47,7 @@ function canOpen(day) {
   const currentDay = now.getDate();
 
   const startMonth = 11;
-  const startYear = 2024;
+  const startYear = 2025;
 
   // Türchen ab 24.: immer offen
   if (currentYear > startYear
