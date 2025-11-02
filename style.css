@@ -32,7 +32,7 @@ body{
 .background-image{
   position:absolute;
   inset:0;
-  background-image: url('images/bg_V1.jpg'); /* dein Winterbild */
+  background-image: url('images/Background_V2.png'); /* dein Winterbild */
   background-size: cover;
   background-position: center;
   filter: blur(4px) brightness(0.9) saturate(0.9);
