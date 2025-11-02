@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tee Adventskalender</title>
-  <link rel="stylesheet" href="style.css?v=7.0" />
+  <link rel="stylesheet" href="style.css?v=7.1" />
 </head>
 <body>
   <div class="page-bg">
@@ -41,27 +41,19 @@
       </div>
     </footer>
 
-  <!-- Modal -->
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
-    <div class="modal-box" role="document">
-      <button id="modalClose" class="modal-close" aria-label="Schließen">&times;</button>
-      <div class="modal-content">
-        <h2 id="teaName" class="modal-title"></h2>
-        <img id="teaImage" class="modal-image" src="" alt="">
-
-        <p id="teaDescription" class="tea-text main"></p>
-        <p id="teaExtra" class="tea-text extra"></p>
-
-        <div class="tea-meta">
-          <p class="meta-row"><span class="meta-label">Haltbar bis:</span> <span id="teaBestBefore" class="meta-value"></span></p>
-          <p class="meta-row"><span class="meta-label">Zutaten:</span> <span id="teaIngredients" class="meta-value"></span></p>
-          <p class="meta-row"><span class="meta-label">Zubereitung:</span> <span id="teaPreparation" class="meta-value"></span></p>
+    <!-- Modal -->
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+      <div class="modal-box" role="document">
+        <button id="modalClose" class="modal-close" aria-label="Schließen">&times;</button>
+        <div class="modal-content">
+          <h2 id="teaName" class="modal-title"></h2>
+          <img id="teaImage" class="modal-image" src="" alt="">
+          <p id="teaDescription" class="modal-desc"></p>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="script.js?v=7.0"></script>
+  <script src="script.js?v=7.1"></script>
 </body>
 </html>
-

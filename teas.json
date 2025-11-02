@@ -3,20 +3,12 @@
     "id": 1,
     "name": "Limette-Ingwer Bio Grüntee",
     "image": "images/Tee01_V1.png",
-    "description": "Milder Sencha, kombiniert mit spritzigen Zitrusschalen und würzig-frischen, süsslichen Ingwer.",
-    "extraDescription": "Auch ideal für die Zubereitung eines grünen Eistees. Alle Zutaten von höchster Güte und aus kontrolliert biologischem Anbau.",
-    "bestBefore": "14.04.2027",
-    "ingredients": "Grüntee 68%, Zitrusschalen 8%, Ingwer 7%, Zimt, Zitronenmyrte, Karotten, Süssholzwurzel, Zitrusöl",
-    "preparation": "1 Teelöffel auf 2 dl 80°C heisses Wasser, 2–3 Minuten ziehen lassen"
+    "description": "Milder Sencha, kombiniert mit spritzigen Zitrusschalen und würzig-frischen, süsslichen Ingwer."
   },
   {
     "id": 2,
-    "name": "Winterapfel Rooibos",
+    "name": "Tee 2",
     "image": "images/Tee02_V1.jpeg",
-    "description": "Fruchtig-süss mit Apfelnote und zarter Zimtwärme.",
-    "extraDescription": "Koffeinfrei – ideal für den Abend.",
-    "bestBefore": "30.03.2027",
-    "ingredients": "Rooibos, Apfelstücke, Zimt, Aroma, Orangenstücke",
-    "preparation": "1–2 TL auf 2 dl kochendes Wasser, 5–8 Min. ziehen lassen"
+    "description": "Beschreibung"
   }
 ]
