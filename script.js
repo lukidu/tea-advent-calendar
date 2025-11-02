@@ -3,15 +3,22 @@
    - openedDoors wird in localStorage gespeichert (Array von Zahlen)
 */
 
-const TEST_MODE = true;        // true = benutze TEST_DAY anstatt echtes Datum
+const TEST_MODE = false;        // true = benutze TEST_DAY anstatt echtes Datum
 const TEST_DAY = 3;             // bis zu welchem Tag testweise geöffnet werden darf
 
 const calendar = document.getElementById('calendar');
+
 const modal = document.getElementById('modal');
 const modalClose = document.getElementById('modalClose');
 const teaName = document.getElementById('teaName');
 const teaImage = document.getElementById('teaImage');
 const teaDescription = document.getElementById('teaDescription');
+
+const teaExtra = document.getElementById('teaExtra');
+const teaBestBefore = document.getElementById('teaBestBefore');
+const teaIngredients = document.getElementById('teaIngredients');
+const teaPreparation = document.getElementById('teaPreparation');
+
 const yearSpan = document.getElementById('year');
 const clearLocalBtn = document.getElementById('clearLocal');
 
@@ -46,7 +53,7 @@ function canOpen(day) {
   const currentMonth = now.getMonth(); // 0 = Januar, 11 = Dezember
   const currentDay = now.getDate();
 
-  const startMonth = 11;
+  const startMonth = 10;
   const startYear = 2025;
 
   // Türchen ab 24.: immer offen
@@ -134,10 +141,40 @@ function openDoor(day, tea){
 }
 
 function showTea(tea){
+  // Titel
   teaName.textContent = tea.name || '';
-  teaImage.src = tea.image || '';
-  teaImage.alt = tea.name || '';
+
+  // Bild
+  if (tea.image) {
+    teaImage.src = tea.image;
+    teaImage.alt = tea.name || '';
+    teaImage.style.display = 'block';
+  } else {
+    teaImage.src = '';
+    teaImage.style.display = 'none';
+  }
+
+  // Beschrieb (Haupttext)
   teaDescription.textContent = tea.description || '';
+
+  // Zusatzbeschrieb (kleiner, grau)
+  if (tea.extraDescription) {
+    teaExtra.textContent = tea.extraDescription;
+    teaExtra.style.display = 'block';
+  } else {
+    teaExtra.textContent = '';
+    teaExtra.style.display = 'none';
+  }
+
+  // Haltbarkeitsdatum
+  teaBestBefore.textContent = tea.bestBefore || '–';
+
+  // Zutaten
+  teaIngredients.textContent = tea.ingredients || '–';
+
+  // Zubereitung
+  teaPreparation.textContent = tea.preparation || '–';
+
   modal.classList.remove('hidden');
 }
 
