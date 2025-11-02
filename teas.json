@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "name": "Limette-Ingwer Bio Grüntee",
+    "name": "Tee 1",
     "image": "images/Tee01_V1.png",
-    "description": "Milder Sencha, kombiniert mit spritzigen Zitrusschalen und würzig-frischen, süsslichen Ingwer. Auch ideal für die Zubereitung eines grünen Eistees. Mindestens haltbar bis: 14.04.2027"
+    "description": "Beschreibung"
   },
   {
     "id": 2,
@@ -67,9 +67,9 @@
   },
   {
     "id": 12,
-    "name": "Tee 12",
+    "name": "Limette-Ingwer Bio Grüntee",
     "image": "images/Tee12_V1.png",
-    "description": "Beschreibung"
+    "description": "Milder Sencha, kombiniert mit spritzigen Zitrusschalen und würzig-frischem, süsslichen Ingwer. Auch ideal für die Zubereitung eines grünen Eistees. Mindestens haltbar bis: 14.04.2027"
   },
   {
     "id": 13,
