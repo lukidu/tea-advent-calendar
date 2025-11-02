@@ -3,7 +3,7 @@
    - openedDoors wird in localStorage gespeichert (Array von Zahlen)
 */
 
-const TEST_MODE = true;        // true = benutze TEST_DAY anstatt echtes Datum
+const TEST_MODE = false;        // true = benutze TEST_DAY anstatt echtes Datum
 const TEST_DAY = 24;             // bis zu welchem Tag testweise geöffnet werden darf
 
 const calendar = document.getElementById('calendar');
@@ -46,7 +46,7 @@ function canOpen(day) {
   const currentMonth = now.getMonth(); // 0 = Januar, 11 = Dezember
   const currentDay = now.getDate();
 
-  const startMonth = 10;
+  const startMonth = 11;
   const startYear = 2025;
 
   // Türchen ab 24.: immer offen
