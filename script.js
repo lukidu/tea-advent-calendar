@@ -3,19 +3,18 @@
    - openedDoors wird in localStorage gespeichert (Array von Zahlen)
 */
 
-const TEST_MODE = true;        // true = benutze TEST_DAY anstatt echtes Datum
-const TEST_DAY = 24;             // bis zu welchem Tag testweise geöffnet werden darf
+const TEST_MODE = true;
+const TEST_DAY = 24;
 
-const calendar = document.getElementById('calendar');
-const modal = document.getElementById('modal');
-const modalClose = document.getElementById('modalClose');
-const teaName = document.getElementById('teaName');
-const teaImage = document.getElementById('teaImage');
-const teaDescription = document.getElementById('teaDescription');
-const teaSubText = document.getElementById('teaSubText');
-const teaPreparation = document.getElementById('teaPreparation');
-const teaExpiry = document.getElementById('teaExpiry');
-const yearSpan = document.getElementById('year');
+const calendar      = document.getElementById('calendar');
+const modal         = document.getElementById('modal');
+const modalClose    = document.getElementById('modalClose');
+const teaName       = document.getElementById('teaName');
+const teaImage      = document.getElementById('teaImage');
+const teaDescription= document.getElementById('teaDescription');
+const teaPreparation= document.getElementById('teaPreparation');
+const teaExpiry     = document.getElementById('teaExpiry');
+const yearSpan      = document.getElementById('year');
 const clearLocalBtn = document.getElementById('clearLocal');
 
 yearSpan.textContent = new Date().getFullYear();
@@ -40,51 +39,44 @@ fetch('teas.json')
     calendar.innerHTML = '<p style="color:#6b6b6b">Fehler: teas.json konnte nicht geladen werden.</p>';
   });
 
-/* Prüft, ob ein Türchen geöffnet werden darf */
+// Prüft, ob ein Türchen geöffnet werden darf
 function canOpen(day) {
-  if (TEST_MODE) return day <= TEST_DAY; // Testmodus übersteuert alles
+  if (TEST_MODE) return day <= TEST_DAY;
 
   const now = new Date();
-  const currentYear = now.getFullYear();
-  const currentMonth = now.getMonth(); // 0 = Januar, 11 = Dezember
-  const currentDay = now.getDate();
+  const currentYear  = now.getFullYear();
+  const currentMonth = now.getMonth();
+  const currentDay   = now.getDate();
 
   const startMonth = 11;
-  const startYear = 2025;
+  const startYear  = 2025;
 
-  // Türchen ab 24.: immer offen
   if (currentYear > startYear
     || (currentYear === startYear && currentMonth > startMonth)
     || (currentYear === startYear && currentMonth === startMonth && currentDay > 24)) {
     return true;
   }
-
-  // Vor dem 1.: alle Türchen gesperrt
   if (currentYear < startYear
     || (currentYear === startYear && currentMonth < startMonth)) {
     return false;
   }
-
-  // Vom 1. bis zum 24.: nur Türchen bis zum heutigen Datum offen
   if (currentYear === startYear && currentMonth === startMonth) {
     return day <= currentDay;
   }
-
-  // Default: gesperrt
   return false;
 }
 
 function renderCalendar(){
   calendar.innerHTML = '';
 
-  for(let day = 1; day <= 24; day++){
+  for(let day=1; day<=24; day++){
     const tile = document.createElement('div');
     tile.classList.add('door');
 
     const tea = teas.find(t => Number(t.id) === day);
 
-    const isOpened = openedDoors.includes(day) && canOpen(day);
-    const isOpenable = canOpen(day);
+    const isOpened  = openedDoors.includes(day) && canOpen(day);
+    const isOpenable= canOpen(day);
 
     if(isOpened){
       tile.classList.add('opened');
@@ -115,7 +107,6 @@ function renderCalendar(){
         tile.addEventListener('click', () => openDoor(day, tea));
       }
     }
-
     calendar.appendChild(tile);
   }
 }
@@ -141,11 +132,7 @@ function showTea(tea){
   teaImage.src               = tea.image || '';
   teaImage.alt               = tea.name || '';
   teaDescription.textContent = tea.description || '';
-  // Untertext
-  teaSubText.textContent     = tea.subText || '';
-  // Zubereitung
   teaPreparation.textContent = tea.preparation || '';
-  // Haltbarkeitsdatum
   teaExpiry.textContent      = tea.expiry || '';
   modal.classList.remove('hidden');
 }

@@ -4,7 +4,6 @@
     "name": "Tee 1",
     "image": "images/Tee01_V1.png",
     "description": "Beschreibung",
-    "subText": "Ein leichter Einstieg in die Adventszeit.",
     "preparation": "1 TL pro Tasse, 3–4 Minuten ziehen lassen.",
     "expiry": "Mindestens haltbar bis: 30.06.2026"
   },
@@ -13,7 +12,6 @@
     "name": "Tee 2",
     "image": "images/Tee02_V1.png",
     "description": "Beschreibung",
-    "subText": "Würzig und belebend.",
     "preparation": "2 TL pro 200 ml, 5 Minuten ziehen lassen.",
     "expiry": "Mindestens haltbar bis: 31.07.2026"
   },
@@ -22,7 +20,6 @@
     "name": "Tee 3",
     "image": "images/Tee03_V1.png",
     "description": "Beschreibung",
-    "subText": "Kräftiger Schwarztee.",
     "preparation": "Mit kochendem Wasser aufgießen, 4 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 01.08.2026"
   },
@@ -31,7 +28,6 @@
     "name": "Tee 4",
     "image": "images/Tee04_V1.png",
     "description": "Beschreibung",
-    "subText": "Sanfter Kräutertee.",
     "preparation": "1–2 TL mit 250 ml Wasser, 7 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 15.09.2026"
   },
@@ -40,7 +36,6 @@
     "name": "Tee 5",
     "image": "images/Tee05_V1.png",
     "description": "Beschreibung",
-    "subText": "Fruchtige Note.",
     "preparation": "Heiß oder kalt genießen, 5 Minuten Ziehzeit.",
     "expiry": "Mindestens haltbar bis: 20.10.2026"
   },
@@ -49,7 +44,6 @@
     "name": "Tee 6",
     "image": "images/Tee06_V1.png",
     "description": "Beschreibung",
-    "subText": "Klassischer Earl Grey.",
     "preparation": "Mit 95°C heißem Wasser 3 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 01.11.2026"
   },
@@ -58,7 +52,6 @@
     "name": "Tee 7",
     "image": "images/Tee07_V1.png",
     "description": "Beschreibung",
-    "subText": "Blumige Kamille.",
     "preparation": "1 Beutel pro Tasse, 6 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 30.11.2026"
   },
@@ -67,7 +60,6 @@
     "name": "Tee 8",
     "image": "images/Tee08_V1.png",
     "description": "Beschreibung",
-    "subText": "Entspannender Abendtee.",
     "preparation": "2 TL mit 250 ml kochendem Wasser, 8 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 15.12.2026"
   },
@@ -76,7 +68,6 @@
     "name": "Tee 9",
     "image": "images/Tee09_V1.png",
     "description": "Beschreibung",
-    "subText": "Weißer Tee mit Zitrus.",
     "preparation": "80°C heißes Wasser, 2–3 Minuten Ziehzeit.",
     "expiry": "Mindestens haltbar bis: 31.12.2026"
   },
@@ -85,7 +76,6 @@
     "name": "Tee 10",
     "image": "images/Tee10_V1.png",
     "description": "Beschreibung",
-    "subText": "Chai-Mischung.",
     "preparation": "Mit Milch aufkochen, 5 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 31.01.2027"
   },
@@ -94,7 +84,6 @@
     "name": "Tee 11",
     "image": "images/Tee11_V1.png",
     "description": "Beschreibung",
-    "subText": "Pfefferminze Pur.",
     "preparation": "Heiß aufgießen, 7 Minuten ziehen lassen.",
     "expiry": "Mindestens haltbar bis: 14.02.2027"
   },
@@ -102,9 +91,8 @@
     "id": 12,
     "name": "Limette-Ingwer Bio Grüntee",
     "image": "images/Tee12_V1.png",
-    "description": "Milder Sencha, kombiniert mit spritzigen Zitrusschalen und würzig-frischem, süsslichen Ingwer.",
-    "subText": "Auch ideal für die Zubereitung eines grünen Eistees. Bio-Qualität aus kontrolliertem Anbau.",
-    "preparation": "1 TL pro 250 ml Wasser, 2–3 Minuten bei 80°C ziehen lassen.",
+    "description": "Milder Sencha, kombiniert mit spritzigen Zitrusschalen und würzig-frischem, süsslichen Ingwer. Auch ideal für die Zubereitung eines grünen Eistees.",
+    "preparation": "1 TL pro 250 ml Wasser, 2–3 Minuten bei 80°C",
     "expiry": "Mindestens haltbar bis: 14.04.2027"
   },
   {
@@ -112,7 +100,6 @@
     "name": "Tee 13",
     "image": "images/Tee13_V1.png",
     "description": "Beschreibung",
-    "subText": "Gewürzte Früchteteemischung.",
     "preparation": "Mit heißem Wasser aufgießen, 8 Minuten ziehen lassen.",
     "expiry": "Mindestens haltbar bis: 30.03.2027"
   },
@@ -121,7 +108,6 @@
     "name": "Tee 14",
     "image": "images/Tee14_V1.png",
     "description": "Beschreibung",
-    "subText": "Japanischer Matcha.",
     "preparation": "Mit 80°C heißem Wasser anrühren, schäumen.",
     "expiry": "Mindestens haltbar bis: 30.04.2027"
   },
@@ -130,7 +116,6 @@
     "name": "Tee 15",
     "image": "images/Tee15_V1.png",
     "description": "Beschreibung",
-    "subText": "Rooibos Vanille.",
     "preparation": "1 Beutel pro Tasse, 5 Minuten ziehen lassen.",
     "expiry": "Mindestens haltbar bis: 31.05.2027"
   },
@@ -139,7 +124,6 @@
     "name": "Tee 16",
     "image": "images/Tee16_V1.png",
     "description": "Beschreibung",
-    "subText": "Gewürztee mit Anis.",
     "preparation": "Mit kochendem Wasser aufgießen, 6 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 30.06.2027"
   },
@@ -148,7 +132,6 @@
     "name": "Tee 17",
     "image": "images/Tee17_V1.png",
     "description": "Beschreibung",
-    "subText": "Schwarztee mit Kirsche.",
     "preparation": "100°C Wasser, 3 Minuten Ziehzeit.",
     "expiry": "Mindestens haltbar bis: 15.07.2027"
   },
@@ -157,7 +140,6 @@
     "name": "Tee 18",
     "image": "images/Tee18_V1.png",
     "description": "Beschreibung",
-    "subText": "Kräutertee mit Fenchel.",
     "preparation": "Mit kochendem Wasser aufgießen, 7–8 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 31.07.2027"
   },
@@ -166,7 +148,6 @@
     "name": "Tee 19",
     "image": "images/Tee19_V1.png",
     "description": "Beschreibung",
-    "subText": "Apfel-Zimt Mischung.",
     "preparation": "2 TL pro Tasse, 10 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 31.08.2027"
   },
@@ -175,7 +156,6 @@
     "name": "Tee 20",
     "image": "images/Tee20_V1.png",
     "description": "Beschreibung",
-    "subText": "Frischer Zitronenverbene-Tee.",
     "preparation": "Mit heißem Wasser aufgießen, 5 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 30.09.2027"
   },
@@ -184,7 +164,6 @@
     "name": "Tee 21",
     "image": "images/Tee21_V1.png",
     "description": "Beschreibung",
-    "subText": "Belebender Mate-Tee.",
     "preparation": "80°C Wasser, 5 Minuten Ziehzeit.",
     "expiry": "Mindestens haltbar bis: 31.10.2027"
   },
@@ -193,7 +172,6 @@
     "name": "Tee 22",
     "image": "images/Tee22_V1.png",
     "description": "Beschreibung",
-    "subText": "Klassischer Assam.",
     "preparation": "Mit kochendem Wasser aufgießen, 4 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 15.11.2027"
   },
@@ -202,7 +180,6 @@
     "name": "Tee 23",
     "image": "images/Tee23_V1.png",
     "description": "Beschreibung",
-    "subText": "Winterlicher Gewürztee.",
     "preparation": "1–2 TL pro Tasse, 8 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 30.11.2027"
   },
@@ -211,7 +188,6 @@
     "name": "Tee 24",
     "image": "images/Tee24_V1.png",
     "description": "Beschreibung",
-    "subText": "Festlicher Weihnachtstee.",
     "preparation": "Mit 90°C heißem Wasser aufgießen, 6 Minuten ziehen.",
     "expiry": "Mindestens haltbar bis: 31.12.2027"
   }

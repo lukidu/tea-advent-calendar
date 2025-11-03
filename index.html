@@ -4,13 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tee Adventskalender</title>
-  <link rel="stylesheet" href="style.css?v=10.2" />
+  <link rel="stylesheet" href="style.css?v=10.3" />
 </head>
 <body>
   <div class="page-bg">
-    <!-- Hintergrundbild (verschneite Landschaft) -->
     <div class="background-image" aria-hidden="true"></div>
-    <!-- Schnee-Ebene: viele .flake-Elemente animiert -->
     <div class="snow" aria-hidden="true">
       <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
       <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
@@ -45,9 +43,7 @@
       <div class="modal-box" role="document">
         <button id="modalClose" class="modal-close" aria-label="Schließen">&times;</button>
         <div class="modal-content">
-          <!-- Titel -->
           <h2 id="teaName" class="modal-title"></h2>
-          <!-- Grid-Layout -->
           <div class="modal-body">
             <!-- Bild -->
             <img id="teaImage" class="modal-image" src="" alt="" />
@@ -64,7 +60,6 @@
             <!-- Beschreibungsbox -->
             <div class="modal-section modal-desc-box">
               <p id="teaDescription" class="modal-desc"></p>
-              <p id="teaSubText" class="modal-subtext"></p>
             </div>
           </div>
         </div>
@@ -72,6 +67,6 @@
     </div>
   </div>
 
-  <script src="script.js?v=10.2"></script>
+  <script src="script.js?v=10.3"></script>
 </body>
 </html>
