@@ -270,7 +270,7 @@ body{
   font-size:1.8rem;
 }
 
-/* Layout Modal body */
+/* New layout for modal body */
 .modal-body{
   display:flex;
   flex-direction: row;
@@ -304,6 +304,17 @@ body{
   font-size:0.85rem;
   color:#6b756e;
   font-style:italic;
+}
+
+/* Box für Beschreibung und Untertext unter dem Bild */
+.modal-desc-box{
+  width:100%;
+  max-width:260px;
+  margin-top:12px;
+  text-align:left;
+}
+.modal-left .modal-desc-box p{
+  margin:0 0 8px;
 }
 
 .modal-right{
