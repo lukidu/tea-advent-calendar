@@ -1,13 +1,10 @@
-/* -------------------------
-   Basis / Reset
-   ------------------------- */
 :root{
   --white: #ffffff;
   --black: #000000;
   --gold: #fdd46a;
   --ice: #f0f7fb;
   --muted: #9aa5a0;
-  --tile-size: 100px; /* anpassen für Mobil/Desktop */
+  --tile-size: 100px;
 }
 
 *{box-sizing:border-box}
@@ -19,20 +16,17 @@ body{
   color:var(--white);
 }
 
-/* -------------------------
-   Hintergrund & Schnee
-   ------------------------- */
+/* Hintergrund & Schnee */
 .page-bg{
   position:relative;
   min-height:100vh;
   overflow:hidden;
 }
 
-/* Hintergrundbild */
 .background-image{
   position:absolute;
   inset:0;
-  background-image: url('images/Background_V1.png'); /* dein Winterbild */
+  background-image: url('images/Background_V1.png');
   background-size: cover;
   background-position: center;
   filter: blur(4px) brightness(0.9) saturate(0.9);
@@ -64,13 +58,13 @@ body{
   animation-iteration-count: infinite;
 }
 
-/* Unterschiedliche Größe, Opazität, Geschwindigkeit */
+/* Schneeflocken variieren */
 .snow .flake:nth-child(odd){width:6px;height:6px;opacity:0.85;animation-duration:9s}
 .snow .flake:nth-child(3n){width:10px;height:10px;opacity:0.95;animation-duration:7s}
 .snow .flake:nth-child(4n){animation-duration:11s;opacity:0.8}
 .snow .flake:nth-child(5n){animation-duration:6.5s}
 
-/* feste horizontale Startpositionen + Delay */
+/* horizontale Positionen */
 .snow .flake:nth-child(1){left:3%; animation-delay:0s;}
 .snow .flake:nth-child(2){left:7%; animation-delay:1s;}
 .snow .flake:nth-child(3){left:12%; animation-delay:0.5s;}
@@ -92,15 +86,12 @@ body{
 .snow .flake:nth-child(19){left:93%; animation-delay:1.9s;}
 .snow .flake:nth-child(20){left:98%; animation-delay:0.05s;}
 
-/* Keyframes */
 @keyframes fall{
   0%{transform: translateY(-10vh) rotate(0deg);}
   100%{transform: translateY(120vh) rotate(360deg);}
 }
 
-/* -------------------------
-   Header
-   ------------------------- */
+/* Header */
 .header{
   position:relative;
   z-index:2;
@@ -118,9 +109,7 @@ body{
   font-size:0.95rem;
 }
 
-/* -------------------------
-   Main / Kalender
-   ------------------------- */
+/* Haupt-Container */
 .container{
   position:relative;
   z-index:2;
@@ -129,7 +118,6 @@ body{
   padding:20px;
   backdrop-filter: blur(4px);
 }
-
 .calendar{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--tile-size), 1fr));
@@ -137,7 +125,7 @@ body{
   justify-items:center;
 }
 
-/* Tile (Türchen) Basis */
+/* Türchen-Basis */
 .door{
   width:var(--tile-size);
   height:var(--tile-size);
@@ -156,15 +144,13 @@ body{
   overflow:hidden;
 }
 
-/* Locked */
+/* Türchen-Zustände */
 .door.locked{
   background: linear-gradient(180deg,#dcdcdc,#cfcfcf);
   color:#6c6c6c;
   cursor:not-allowed;
   opacity:0.95;
 }
-
-/* Openable (heute möglich) */
 .door.openable{
   background: linear-gradient(180deg,var(--gold), #f6b93b);
   color:var(--black);
@@ -175,8 +161,6 @@ body{
   transform:translateY(-6px) scale(1.03);
   box-shadow: 0 18px 30px rgba(31,111,74,0.12);
 }
-
-/* subtle shimmer effect for openable */
 .door.openable::after{
   content:"";
   position:absolute;
@@ -188,7 +172,6 @@ body{
 }
 .door.openable:hover::after{ transform: translateX(110%); }
 
-/* Opened: show image */
 .door.opened{
   background:#fff;
   border: 2px solid rgba(31,111,74,0.12);
@@ -202,8 +185,6 @@ body{
   display:block;
   border-radius:12px;
 }
-
-/* small day-label overlay */
 .door.opened .day-label{
   position:absolute;
   top:6px;
@@ -215,9 +196,7 @@ body{
   border-radius:8px;
 }
 
-/* -------------------------
-   Modal
-   ------------------------- */
+/* Modal-Layout */
 .modal{
   position:fixed;
   inset:0;
@@ -229,7 +208,6 @@ body{
   padding:16px;
 }
 .modal.hidden{ display:none }
-
 .modal-box{
   width:100%;
   max-width:720px;
@@ -244,7 +222,6 @@ body{
   from { transform: translateY(8px) scale(.985); opacity:0 }
   to { transform: translateY(0) scale(1); opacity:1}
 }
-
 .modal-close{
   position:absolute;
   right:12px;
@@ -255,14 +232,12 @@ body{
   color:var(--muted);
   cursor:pointer;
 }
-
-/* Modal Content Zentrierung */
 .modal-content{
   display:flex;
-  flex-direction: column; /* vertikal stapeln */
-  align-items: center;    /* horizontal zentrieren */
-  text-align: center;     /* Text mittig */
-  gap: 16px;              /* Abstand zwischen Elementen */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap:16px;
 }
 .modal-title{
   margin:0;
@@ -270,29 +245,41 @@ body{
   font-size:1.8rem;
 }
 
-/* New layout for modal body */
+/* Grid-Aufteilung im Modal */
 .modal-body{
-  display:flex;
-  flex-direction: row;
-  flex-wrap:wrap;
+  display:grid;
   gap:24px;
+  grid-template-columns:auto 1fr;
+  grid-template-areas:
+    "image prep"
+    "image expiry"
+    "desc desc";
+  align-items:start;
   width:100%;
 }
-.modal-left{
-  flex:1 1 300px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  gap:12px;
-}
+
+/* Grid-Areas für die Inhalte */
 .modal-image{
+  grid-area:image;
   width:260px;
   max-width:100%;
   border-radius:10px;
   object-fit:cover;
   box-shadow: 0 10px 30px rgba(10,20,20,0.08);
 }
+.modal-prep{ grid-area:prep; }
+.modal-expiry{ grid-area:expiry; }
+.modal-desc-box{
+  grid-area:desc;
+  width:100%;
+  max-width:none;
+  margin:0;
+  text-align:left;
+}
+.modal-desc-box p{
+  margin:0 0 8px;
+}
+
 .modal-desc{
   color:#43524a;
   margin:0;
@@ -306,29 +293,12 @@ body{
   font-style:italic;
 }
 
-/* Box für Beschreibung und Untertext unter dem Bild */
-.modal-desc-box{
-  width:100%;
-  max-width:260px;
-  margin-top:12px;
-  text-align:left;
-}
-.modal-left .modal-desc-box p{
-  margin:0 0 8px;
-}
-
-.modal-right{
-  flex:1 1 200px;
-  display:flex;
-  flex-direction:column;
-  gap:20px;
-  align-items:flex-start;
-}
+/* Boxen-Styling */
 .modal-section{
   background:#f5f8f7;
   border-radius:8px;
   padding:12px 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
   width:100%;
 }
 .modal-section h3{
@@ -344,15 +314,27 @@ body{
   line-height:1.4;
 }
 
-/* responsive */
+/* Mobile-Ansicht */
 @media (max-width:720px){
-  :root{ --tile-size:84px }
-  .modal-body{ flex-direction:column; }
-  .modal-left, .modal-right{ flex:1 1 auto; width:100%; }
-  .modal-image{ width:100%; max-width:100%; }
+  :root{ --tile-size:84px; }
+  .modal-body{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "image"
+      "desc"
+      "prep"
+      "expiry";
+  }
+  .modal-image{
+    width:100%;
+    max-width:100%;
+  }
+  .modal-desc-box{
+    max-width:100%;
+  }
 }
 
-/* GitHub Pages Standard-Footer ausblenden */
+/* Footer ausblenden */
 footer, .site-footer {
-  display: none !important;
+  display:none !important;
 }

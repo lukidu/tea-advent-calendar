@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tee Adventskalender</title>
-  <link rel="stylesheet" href="style.css?v=10.1" />
+  <link rel="stylesheet" href="style.css?v=10.2" />
 </head>
 <body>
   <div class="page-bg">
@@ -12,7 +12,6 @@
     <div class="background-image" aria-hidden="true"></div>
     <!-- Schnee-Ebene: viele .flake-Elemente animiert -->
     <div class="snow" aria-hidden="true">
-      <!-- 40 Schneeflocken (du kannst Anzahl anpassen) -->
       <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
       <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
       <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
@@ -48,32 +47,31 @@
         <div class="modal-content">
           <!-- Titel -->
           <h2 id="teaName" class="modal-title"></h2>
-          <!-- Zwei-Spalten-Layout -->
+          <!-- Grid-Layout -->
           <div class="modal-body">
-          <!-- Linke Spalte: Bild und Beschreibungsbox -->
-          <div class="modal-left">
+            <!-- Bild -->
             <img id="teaImage" class="modal-image" src="" alt="" />
+            <!-- Zubereitung -->
+            <div class="modal-section modal-prep">
+              <h3>Zubereitung</h3>
+              <p id="teaPreparation"></p>
+            </div>
+            <!-- Haltbarkeit -->
+            <div class="modal-section modal-expiry">
+              <h3>Haltbarkeit</h3>
+              <p id="teaExpiry"></p>
+            </div>
+            <!-- Beschreibungsbox -->
             <div class="modal-section modal-desc-box">
               <p id="teaDescription" class="modal-desc"></p>
               <p id="teaSubText" class="modal-subtext"></p>
             </div>
           </div>
-          <!-- Rechte Spalte: Zubereitung und Haltbarkeit -->
-          <div class="modal-right">
-            <div class="modal-section modal-prep">
-              <h3>Zubereitung</h3>
-              <p id="teaPreparation"></p>
-            </div>
-            <div class="modal-section modal-expiry">
-              <h3>Haltbarkeit</h3>
-              <p id="teaExpiry"></p>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
     </div>
+  </div>
 
-  <script src="script.js?v=10.1"></script>
+  <script src="script.js?v=10.2"></script>
 </body>
 </html>

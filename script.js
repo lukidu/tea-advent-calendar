@@ -137,16 +137,16 @@ function openDoor(day, tea){
 }
 
 function showTea(tea){
-  teaName.textContent = tea.name || '';
-  teaImage.src = tea.image || '';
-  teaImage.alt = tea.name || '';
+  teaName.textContent        = tea.name || '';
+  teaImage.src               = tea.image || '';
+  teaImage.alt               = tea.name || '';
   teaDescription.textContent = tea.description || '';
-  // Set optional subtitle
-  teaSubText.textContent = tea.subText || '';
-  // Set preparation instructions
+  // Untertext
+  teaSubText.textContent     = tea.subText || '';
+  // Zubereitung
   teaPreparation.textContent = tea.preparation || '';
-  // Set expiry date
-  teaExpiry.textContent = tea.expiry || '';
+  // Haltbarkeitsdatum
+  teaExpiry.textContent      = tea.expiry || '';
   modal.classList.remove('hidden');
 }
 
