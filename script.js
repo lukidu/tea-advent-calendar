@@ -25,7 +25,7 @@ openedDoors = Array.from(new Set(openedDoors.map(n => Number(n)).filter(n => !is
 
 // Load teas and render
 let teas = [];
-fetch('teas.json')
+fetch('teas.json?v=10.4')
   .then(res => {
     if(!res.ok) throw new Error('teas.json konnte nicht geladen werden');
     return res.json();

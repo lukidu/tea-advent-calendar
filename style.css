@@ -91,7 +91,7 @@ body{
 .modal-image{ grid-area:image; width:260px; max-width:100%; border-radius:10px; object-fit:cover; box-shadow:0 10px 30px rgba(10,20,20,0.08); }
 .modal-prep{ grid-area:prep; }
 .modal-expiry{ grid-area:expiry; }
-.modal-desc-box{ grid-area:desc; width:100%; max-width:none; margin:0; text-align:left; }
+.modal-desc-box{ grid-area:desc; width:100%; max-width:none; margin:0; text-align:center; }
 .modal-desc-box p{ margin:0 0 8px; }
 .modal-desc{ color:#43524a; margin:0; line-height:1.4; font-size:1rem; }
 
