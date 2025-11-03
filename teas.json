@@ -3,192 +3,192 @@
     "id": 1,
     "name": "Tee 1",
     "image": "images/Tee01_V1.png",
-    "description": "Beschreibung",
-    "preparation": "1 TL pro Tasse, 3–4 Minuten ziehen lassen.",
-    "expiry": "Mindestens haltbar bis: 30.06.2026"
+    "description": "Beschreibung Tee 1",
+    "preparation": "Beschreibung Zubereitung Tee 1",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 2,
     "name": "Tee 2",
     "image": "images/Tee02_V1.png",
-    "description": "Beschreibung",
-    "preparation": "2 TL pro 200 ml, 5 Minuten ziehen lassen.",
-    "expiry": "Mindestens haltbar bis: 31.07.2026"
+    "description": "Beschreibung Tee 2",
+    "preparation": "Beschreibung Zubereitung Tee 2",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 3,
     "name": "Tee 3",
     "image": "images/Tee03_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit kochendem Wasser aufgießen, 4 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 01.08.2026"
+    "description": "Beschreibung Tee 3",
+    "preparation": "Beschreibung Zubereitung Tee 3",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 4,
     "name": "Tee 4",
     "image": "images/Tee04_V1.png",
-    "description": "Beschreibung",
-    "preparation": "1–2 TL mit 250 ml Wasser, 7 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 15.09.2026"
+    "description": "Beschreibung Tee 4",
+    "preparation": "Beschreibung Zubereitung Tee 4",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 5,
     "name": "Tee 5",
     "image": "images/Tee05_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Heiß oder kalt genießen, 5 Minuten Ziehzeit.",
-    "expiry": "Mindestens haltbar bis: 20.10.2026"
+    "description": "Beschreibung Tee 5",
+    "preparation": "Beschreibung Zubereitung Tee 5",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 6,
     "name": "Tee 6",
     "image": "images/Tee06_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit 95°C heißem Wasser 3 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 01.11.2026"
+    "description": "Beschreibung Tee 6",
+    "preparation": "Beschreibung Zubereitung Tee 6",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 7,
     "name": "Tee 7",
     "image": "images/Tee07_V1.png",
-    "description": "Beschreibung",
-    "preparation": "1 Beutel pro Tasse, 6 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 30.11.2026"
+    "description": "Beschreibung Tee 7",
+    "preparation": "Beschreibung Zubereitung Tee 7",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 8,
     "name": "Tee 8",
     "image": "images/Tee08_V1.png",
-    "description": "Beschreibung",
-    "preparation": "2 TL mit 250 ml kochendem Wasser, 8 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 15.12.2026"
+    "description": "Beschreibung Tee 8",
+    "preparation": "Beschreibung Zubereitung Tee 8",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 9,
     "name": "Tee 9",
     "image": "images/Tee09_V1.png",
-    "description": "Beschreibung",
-    "preparation": "80°C heißes Wasser, 2–3 Minuten Ziehzeit.",
-    "expiry": "Mindestens haltbar bis: 31.12.2026"
+    "description": "Beschreibung Tee 9",
+    "preparation": "Beschreibung Zubereitung Tee 9",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 10,
     "name": "Tee 10",
     "image": "images/Tee10_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit Milch aufkochen, 5 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 31.01.2027"
+    "description": "Beschreibung Tee 10",
+    "preparation": "Beschreibung Zubereitung Tee 10",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 11,
     "name": "Tee 11",
     "image": "images/Tee11_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Heiß aufgießen, 7 Minuten ziehen lassen.",
-    "expiry": "Mindestens haltbar bis: 14.02.2027"
+    "description": "Beschreibung Tee 11",
+    "preparation": "Beschreibung Zubereitung Tee 11",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 12,
     "name": "Limette-Ingwer Bio Grüntee",
     "image": "images/Tee12_V1.png",
     "description": "Milder Sencha, kombiniert mit spritzigen Zitrusschalen und würzig-frischem, süsslichen Ingwer. Auch ideal für die Zubereitung eines grünen Eistees.",
-    "preparation": "1 TL pro 250 ml Wasser, 2–3 Minuten bei 80°C",
-    "expiry": "Mindestens haltbar bis: 14.04.2027"
+    "preparation": "1-2 TL pro 250 ml heisses Wasser, 2–3 min",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 13,
     "name": "Tee 13",
     "image": "images/Tee13_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit heißem Wasser aufgießen, 8 Minuten ziehen lassen.",
-    "expiry": "Mindestens haltbar bis: 30.03.2027"
+    "description": "Beschreibung Tee 13",
+    "preparation": "Beschreibung Zubereitung Tee 13",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 14,
     "name": "Tee 14",
     "image": "images/Tee14_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit 80°C heißem Wasser anrühren, schäumen.",
-    "expiry": "Mindestens haltbar bis: 30.04.2027"
+    "description": "Beschreibung Tee 14",
+    "preparation": "Beschreibung Zubereitung Tee 14",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 15,
     "name": "Tee 15",
     "image": "images/Tee15_V1.png",
-    "description": "Beschreibung",
-    "preparation": "1 Beutel pro Tasse, 5 Minuten ziehen lassen.",
-    "expiry": "Mindestens haltbar bis: 31.05.2027"
+    "description": "Beschreibung Tee 15",
+    "preparation": "Beschreibung Zubereitung Tee 15",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 16,
     "name": "Tee 16",
     "image": "images/Tee16_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit kochendem Wasser aufgießen, 6 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 30.06.2027"
+    "description": "Beschreibung Tee 16",
+    "preparation": "Beschreibung Zubereitung Tee 16",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 17,
     "name": "Tee 17",
     "image": "images/Tee17_V1.png",
-    "description": "Beschreibung",
-    "preparation": "100°C Wasser, 3 Minuten Ziehzeit.",
-    "expiry": "Mindestens haltbar bis: 15.07.2027"
+    "description": "Beschreibung Tee 17",
+    "preparation": "Beschreibung Zubereitung Tee 17",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 18,
     "name": "Tee 18",
     "image": "images/Tee18_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit kochendem Wasser aufgießen, 7–8 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 31.07.2027"
+    "description": "Beschreibung Tee 18",
+    "preparation": "Beschreibung Zubereitung Tee 18",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 19,
     "name": "Tee 19",
     "image": "images/Tee19_V1.png",
-    "description": "Beschreibung",
-    "preparation": "2 TL pro Tasse, 10 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 31.08.2027"
+    "description": "Beschreibung Tee 19",
+    "preparation": "Beschreibung Zubereitung Tee 19",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 20,
     "name": "Tee 20",
     "image": "images/Tee20_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit heißem Wasser aufgießen, 5 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 30.09.2027"
+    "description": "Beschreibung Tee 20",
+    "preparation": "Beschreibung Zubereitung Tee 20",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 21,
     "name": "Tee 21",
     "image": "images/Tee21_V1.png",
-    "description": "Beschreibung",
-    "preparation": "80°C Wasser, 5 Minuten Ziehzeit.",
-    "expiry": "Mindestens haltbar bis: 31.10.2027"
+    "description": "Beschreibung Tee 21",
+    "preparation": "Beschreibung Zubereitung Tee 21",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 22,
     "name": "Tee 22",
     "image": "images/Tee22_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit kochendem Wasser aufgießen, 4 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 15.11.2027"
+    "description": "Beschreibung Tee 22",
+    "preparation": "Beschreibung Zubereitung Tee 22",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 23,
     "name": "Tee 23",
     "image": "images/Tee23_V1.png",
-    "description": "Beschreibung",
-    "preparation": "1–2 TL pro Tasse, 8 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 30.11.2027"
+    "description": "Beschreibung Tee 23",
+    "preparation": "Beschreibung Zubereitung Tee 23",
+    "expiry": "xx.xx.xxxx"
   },
   {
     "id": 24,
     "name": "Tee 24",
     "image": "images/Tee24_V1.png",
-    "description": "Beschreibung",
-    "preparation": "Mit 90°C heißem Wasser aufgießen, 6 Minuten ziehen.",
-    "expiry": "Mindestens haltbar bis: 31.12.2027"
+    "description": "Beschreibung Tee 24",
+    "preparation": "Beschreibung Zubereitung Tee 24",
+    "expiry": "xx.xx.xxxx"
   }
 ]
