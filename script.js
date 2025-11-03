@@ -12,6 +12,9 @@ const modalClose = document.getElementById('modalClose');
 const teaName = document.getElementById('teaName');
 const teaImage = document.getElementById('teaImage');
 const teaDescription = document.getElementById('teaDescription');
+const teaSubText = document.getElementById('teaSubText');
+const teaPreparation = document.getElementById('teaPreparation');
+const teaExpiry = document.getElementById('teaExpiry');
 const yearSpan = document.getElementById('year');
 const clearLocalBtn = document.getElementById('clearLocal');
 
@@ -138,6 +141,12 @@ function showTea(tea){
   teaImage.src = tea.image || '';
   teaImage.alt = tea.name || '';
   teaDescription.textContent = tea.description || '';
+  // Set optional subtitle
+  teaSubText.textContent = tea.subText || '';
+  // Set preparation instructions
+  teaPreparation.textContent = tea.preparation || '';
+  // Set expiry date
+  teaExpiry.textContent = tea.expiry || '';
   modal.classList.remove('hidden');
 }
 
