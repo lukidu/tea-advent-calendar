@@ -3,7 +3,7 @@
    - openedDoors wird in localStorage gespeichert (Array von Zahlen)
 */
 
-const TEST_MODE = true;
+const TEST_MODE = false;
 const TEST_DAY = 24;
 
 const calendar      = document.getElementById('calendar');
@@ -25,7 +25,7 @@ openedDoors = Array.from(new Set(openedDoors.map(n => Number(n)).filter(n => !is
 
 // Load teas and render
 let teas = [];
-fetch('teas.json?v=10.6')
+fetch('teas.json?v=11.0')
   .then(res => {
     if(!res.ok) throw new Error('teas.json konnte nicht geladen werden');
     return res.json();
@@ -48,7 +48,7 @@ function canOpen(day) {
   const currentMonth = now.getMonth();
   const currentDay   = now.getDate();
 
-  const startMonth = 10; // 11 = Dezember
+  const startMonth = 11; // 11 = Dezember
   const startYear  = 2025;
 
   if (currentYear > startYear
