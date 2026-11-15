@@ -18,7 +18,7 @@ const CALENDAR_YEAR = 2026;
 // den echten Kalender nicht.
 // WICHTIG: Vor dem Verschenken wieder auf false stellen!
 // ============================================================
-const TEST_MODE = true;
+const TEST_MODE = false;
 const TEST_DATE = '2026-12-24'; // Jahr-Monat-Tag
 
 const STORAGE_KEY        = TEST_MODE ? 'openedDoors-test' : `openedDoors-${CALENDAR_YEAR}`;
