@@ -71,31 +71,26 @@ body{
 
 /* ---------- Header ---------- */
 .header{ position:relative; z-index:2; text-align:center; padding:56px 20px 8px; }
-.eyebrow{
-  margin:0 0 10px; font-size:0.78rem; font-weight:600;
-  letter-spacing:0.32em; text-transform:uppercase; color:var(--gold);
-}
 .title{
   margin:0; font-family:var(--serif); font-weight:600;
   font-size:clamp(2.3rem, 6.5vw, 4.4rem); line-height:1.02; letter-spacing:-0.02em;
   text-wrap:balance;
 }
 .title em{ font-style:italic; font-weight:400; color:var(--gold-soft); }
-.subtitle{ margin:14px 0 0; color:var(--muted); font-size:1.05rem; }
 
 .status{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:26px; }
 .pill{
   display:inline-flex; align-items:center; gap:12px;
   padding:9px 16px; border-radius:999px;
-  background:rgba(247,236,217,0.08); border:1px solid var(--line);
+  background:rgba(247,236,217,0.05); border:1px solid rgba(247,236,217,0.1);
   backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-  font-size:0.88rem; color:var(--cream);
+  font-size:0.85rem; color:var(--muted);
   font-variant-numeric:tabular-nums;
 }
 .pill[hidden]{ display:none; }
-.pill-accent{ color:var(--gold-soft); border-color:rgba(242,184,75,0.35); background:rgba(242,184,75,0.1); }
-.bar{ display:block; width:84px; height:6px; border-radius:999px; background:rgba(247,236,217,0.16); overflow:hidden; }
-.bar-fill{ display:block; height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg, var(--gold), var(--terra)); transition:width 600ms ease; }
+.pill-accent{ color:rgba(248,213,138,0.8); border-color:rgba(242,184,75,0.2); }
+.bar{ display:block; width:72px; height:4px; border-radius:999px; background:rgba(247,236,217,0.12); overflow:hidden; }
+.bar-fill{ display:block; height:100%; width:0; border-radius:inherit; background:rgba(247,236,217,0.55); transition:width 600ms ease; }
 
 /* ---------- Kalender ---------- */
 .container{ position:relative; z-index:2; max-width:1020px; margin:34px auto 0; padding:0 20px; container-type:inline-size; }

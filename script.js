@@ -17,7 +17,7 @@ const TEST_DAY = 24;
 
 const STORAGE_KEY        = `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
-const VERSION            = '12.2';
+const VERSION            = '12.3';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
@@ -35,8 +35,6 @@ const toastEl       = document.getElementById('toast');
 const snowEl        = document.getElementById('snow');
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-document.getElementById('calYear').textContent = CALENDAR_YEAR;
 
 /* ---------- Speicher ---------- */
 
