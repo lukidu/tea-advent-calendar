@@ -9,15 +9,21 @@
 // - Danach (Januar usw.): alle Türchen bleiben offen
 // Bei einem neuen Jahr beginnen die geöffneten Türchen automatisch neu.
 // ============================================================
-const CALENDAR_YEAR = 2025;
+const CALENDAR_YEAR = 2026;
 
-// Testmodus: true erlaubt das "Vorspulen" bis TEST_DAY
-const TEST_MODE = false;
-const TEST_DAY = 24;
+// ============================================================
+// TESTMODUS: Bei true tut die Seite so, als wäre heute TEST_DATE.
+// Die Uhr läuft ab diesem Datum normal weiter (mit der echten Uhrzeit).
+// Im Test geöffnete Türchen werden getrennt gespeichert und stören
+// den echten Kalender nicht.
+// WICHTIG: Vor dem Verschenken wieder auf false stellen!
+// ============================================================
+const TEST_MODE = true;
+const TEST_DATE = '2026-12-10'; // Jahr-Monat-Tag
 
-const STORAGE_KEY        = `openedDoors-${CALENDAR_YEAR}`;
+const STORAGE_KEY        = TEST_MODE ? 'openedDoors-test' : `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
-const VERSION            = '12.3';
+const VERSION            = '12.4';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
@@ -44,7 +50,7 @@ function loadOpenedDoors() {
   try {
     let raw = localStorage.getItem(STORAGE_KEY);
     // Stand aus der alten Version übernehmen, damit 2025 nichts verloren geht
-    if (raw === null && CALENDAR_YEAR === 2025) raw = localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (raw === null && !TEST_MODE && CALENDAR_YEAR === 2025) raw = localStorage.getItem(LEGACY_STORAGE_KEY);
     const stored = JSON.parse(raw);
     if (!Array.isArray(stored)) return [];
     const days = stored.map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= 24);
@@ -90,11 +96,23 @@ fetch(`teas.json?v=${VERSION}`)
 
 /* ---------- Datumslogik ---------- */
 
+// Abstand zwischen simuliertem und echtem Datum (0 ausserhalb des Testmodus)
+const timeOffset = (() => {
+  if (!TEST_MODE) return 0;
+  const [y, m, d] = TEST_DATE.split('-').map(Number);
+  const real = new Date();
+  const simulated = new Date(y, m - 1, d, real.getHours(), real.getMinutes(), real.getSeconds());
+  return Number.isNaN(simulated.getTime()) ? 0 : simulated - real;
+})();
+
+// Das aktuelle Datum – im Testmodus das simulierte
+function currentDate() {
+  return new Date(Date.now() + timeOffset);
+}
+
 // Prüft, ob ein Türchen geöffnet werden darf
 function canOpen(day) {
-  if (TEST_MODE) return day <= TEST_DAY;
-
-  const now   = new Date();
+  const now   = currentDate();
   const year  = now.getFullYear();
   const month = now.getMonth(); // 11 = Dezember
 
@@ -106,8 +124,7 @@ function canOpen(day) {
 
 // Das Türchen von heute (1–24) oder null ausserhalb der Adventszeit
 function todaysDoor() {
-  if (TEST_MODE) return TEST_DAY;
-  const now = new Date();
+  const now = currentDate();
   if (now.getFullYear() !== CALENDAR_YEAR || now.getMonth() !== 11) return null;
   return now.getDate() <= 24 ? now.getDate() : null;
 }
@@ -413,9 +430,7 @@ function formatDuration(ms) {
 }
 
 function countdownText() {
-  if (TEST_MODE) return 'Testmodus aktiv';
-
-  const now   = new Date();
+  const now   = currentDate();
   const start = new Date(CALENDAR_YEAR, 11, 1);
   const last  = new Date(CALENDAR_YEAR, 11, 24);
 
@@ -434,7 +449,7 @@ function countdownText() {
 }
 
 function updateCountdown() {
-  countdownEl.textContent = countdownText();
+  countdownEl.textContent = (TEST_MODE ? 'Testmodus · ' : '') + countdownText();
   countdownEl.hidden = false;
   // Um Mitternacht wird ein neues Türchen frei – Kalender neu zeichnen
   if (!opening && openableCount() !== renderedOpenable) renderCalendar();
