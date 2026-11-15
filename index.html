@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Seite nicht in Suchmaschinen aufnehmen -->
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <!-- Nur eigene Dateien laden: kein fremder Code, keine fremden Server -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'" />
+  <title>Tee Adventskalender</title>
+  <link rel="stylesheet" href="style.css?v=11.2" />
+</head>
+<body>
+  <div class="page-bg">
+    <div class="background-image" aria-hidden="true"></div>
+    <div class="snow" aria-hidden="true">
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+    </div>
+
+    <header class="header">
+      <h1 class="title">Tee Adventskalender</h1>
+      <p class="subtitle">24 Tees nur für dich!</p>
+    </header>
+
+    <main class="container">
+      <section id="calendar" class="calendar" aria-label="Adventskalender"></section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="teaName">
+      <div class="modal-box">
+        <button id="modalClose" class="modal-close" type="button" aria-label="Schliessen">&times;</button>
+        <div class="modal-content">
+          <h2 id="teaName" class="modal-title"></h2>
+          <div class="modal-body">
+            <!-- Bild -->
+            <img id="teaImage" class="modal-image" alt="" />
+            <!-- Zubereitung -->
+            <div class="modal-section modal-prep">
+              <h3>Zubereitung</h3>
+              <p id="teaPreparation"></p>
+            </div>
+            <!-- Haltbarkeit -->
+            <div class="modal-section modal-expiry">
+              <h3>Haltbarkeit</h3>
+              <p id="teaExpiry"></p>
+            </div>
+            <!-- Beschreibungsbox -->
+            <div class="modal-section modal-desc-box">
+              <p id="teaDescription" class="modal-desc"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js?v=11.2"></script>
+</body>
+</html>
