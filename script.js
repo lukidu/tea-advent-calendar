@@ -17,17 +17,29 @@ const TEST_DAY = 24;
 
 const STORAGE_KEY        = `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
+const VERSION            = '12.0';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
 const modalClose    = document.getElementById('modalClose');
+const teaDay        = document.getElementById('teaDay');
 const teaName       = document.getElementById('teaName');
 const teaImage      = document.getElementById('teaImage');
 const teaDescription= document.getElementById('teaDescription');
 const teaPreparation= document.getElementById('teaPreparation');
 const teaExpiry     = document.getElementById('teaExpiry');
+const progressText  = document.getElementById('progressText');
+const progressBar   = document.getElementById('progressBar');
+const countdownEl   = document.getElementById('countdown');
+const toastEl       = document.getElementById('toast');
+const snowEl        = document.getElementById('snow');
 
-// Geöffnete Türchen aus localStorage laden.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+document.getElementById('calYear').textContent = CALENDAR_YEAR;
+
+/* ---------- Speicher ---------- */
+
 // localStorage kann fehlen (privater Modus) oder kaputte Daten enthalten –
 // beides darf die Seite nicht zum Absturz bringen.
 function loadOpenedDoors() {
@@ -55,9 +67,10 @@ function saveOpenedDoors() {
 
 let openedDoors = loadOpenedDoors();
 
-// Load teas and render
+/* ---------- Daten laden ---------- */
+
 let teas = [];
-fetch('teas.json?v=11.2')
+fetch(`teas.json?v=${VERSION}`)
   .then(res => {
     if(!res.ok) throw new Error('teas.json konnte nicht geladen werden');
     return res.json();
@@ -66,11 +79,18 @@ fetch('teas.json?v=11.2')
     if (!Array.isArray(data)) throw new Error('teas.json hat ein unerwartetes Format');
     teas = data;
     renderCalendar();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
   })
   .catch(err => {
     console.error('Fehler beim Laden der Teedaten:', err);
-    calendar.innerHTML = '<p style="color:#6b6b6b">Fehler: teas.json konnte nicht geladen werden.</p>';
+    const msg = document.createElement('p');
+    msg.className = 'load-error';
+    msg.textContent = 'Fehler: Die Teedaten konnten nicht geladen werden.';
+    calendar.replaceChildren(msg);
   });
+
+/* ---------- Datumslogik ---------- */
 
 // Prüft, ob ein Türchen geöffnet werden darf
 function canOpen(day) {
@@ -86,105 +106,257 @@ function canOpen(day) {
   return day <= now.getDate();
 }
 
-function renderCalendar(){
-  calendar.innerHTML = '';
+// Das Türchen von heute (1–24) oder null ausserhalb der Adventszeit
+function todaysDoor() {
+  if (TEST_MODE) return TEST_DAY;
+  const now = new Date();
+  if (now.getFullYear() !== CALENDAR_YEAR || now.getMonth() !== 11) return null;
+  return now.getDate() <= 24 ? now.getDate() : null;
+}
+
+function openableCount() {
+  let n = 0;
+  for (let day = 1; day <= 24; day++) if (canOpen(day)) n++;
+  return n;
+}
+
+/* ---------- Kalender ---------- */
+
+let renderedOpenable = -1;
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+function renderCalendar(justOpened){
+  const today = todaysDoor();
+  const tiles = [];
 
   for(let day=1; day<=24; day++){
     // <button>, damit die Türchen auch per Tastatur bedienbar sind
-    const tile = document.createElement('button');
+    const tile = el('button', 'door');
     tile.type = 'button';
-    tile.classList.add('door');
 
     const tea = teas.find(t => Number(t.id) === day);
 
     const isOpenable = canOpen(day);
     const isOpened   = isOpenable && openedDoors.includes(day);
 
+    if (day === today) tile.classList.add('today');
+    if (day === justOpened) tile.classList.add('just-opened');
+
     if(isOpened){
       tile.classList.add('opened');
       tile.setAttribute('aria-label', `Türchen ${day}${tea && tea.name ? ': ' + tea.name : ''}`);
       if(tea && tea.image){
-        const img = document.createElement('img');
+        const img = el('img');
         img.src = tea.image;
         img.alt = '';
         img.loading = 'lazy';
         img.decoding = 'async';
         tile.appendChild(img);
-
-        const label = document.createElement('span');
-        label.classList.add('day-label');
-        label.textContent = day;
-        tile.appendChild(label);
+        tile.appendChild(el('span', 'day-label', day));
+        if (tea.name) tile.appendChild(el('span', 'door-name', tea.name));
       } else {
-        tile.textContent = day;
+        tile.appendChild(el('span', 'door-num', day));
       }
-
       tile.addEventListener('click', () => {
-        if(tea) showTea(tea);
+        if(tea) showTea(tea, day);
       });
 
     } else {
-      tile.textContent = day;
+      tile.appendChild(el('span', 'door-num', day));
       if(!isOpenable){
         tile.classList.add('locked');
-        tile.disabled = true;
+        // aria-disabled statt disabled: so kann ein Klick eine Rückmeldung geben
+        tile.setAttribute('aria-disabled', 'true');
         tile.setAttribute('aria-label', `Türchen ${day} (noch verschlossen)`);
+        tile.appendChild(el('span', 'door-lock'));
+        tile.addEventListener('click', () => lockedFeedback(tile, day));
       } else {
         tile.classList.add('openable');
         tile.setAttribute('aria-label', `Türchen ${day} öffnen`);
-        tile.addEventListener('click', () => openDoor(day, tea));
+        if (day === today) tile.appendChild(el('span', 'door-badge', 'Heute'));
+        tile.addEventListener('click', () => openDoor(day, tea, tile));
       }
     }
-    calendar.appendChild(tile);
+    tiles.push(tile);
   }
+
+  calendar.replaceChildren(...tiles);
+  renderedOpenable = openableCount();
+  updateProgress();
 }
 
-function openDoor(day, tea){
+function updateProgress() {
+  const count = openedDoors.filter(canOpen).length;
+  progressText.textContent = `${count} von 24 geöffnet`;
+  progressBar.style.width = `${(count / 24) * 100}%`;
+}
+
+function lockedFeedback(tile, day) {
+  tile.classList.remove('shake');
+  void tile.offsetWidth; // Animation neu starten
+  tile.classList.add('shake');
+  toast(`Noch etwas Geduld – Türchen ${day} öffnet sich am ${day}. Dezember.`);
+}
+
+let opening = false;
+
+function openDoor(day, tea, tile){
+  if(opening) return;
   if(!canOpen(day)){
-    alert(`Dieses Türchen darf erst am ${day}. Dezember geöffnet werden!`);
+    lockedFeedback(tile, day);
     return;
   }
-
-  if(tea) showTea(tea);
-  else alert('Für dieses Türchen ist noch kein Tee definiert.');
+  if(!tea){
+    toast('Für dieses Türchen ist noch kein Tee definiert.');
+    return;
+  }
 
   if(!openedDoors.includes(day)){
     openedDoors.push(day);
     saveOpenedDoors();
-    renderCalendar();
   }
+
+  if(reducedMotion){
+    renderCalendar();
+    showTea(tea, day);
+    return;
+  }
+
+  // Türchen klappt weg, das Bild klappt herein, dann erscheint der Tee
+  opening = true;
+  tile.classList.add('closing');
+  setTimeout(() => {
+    renderCalendar(day);
+    const opened = calendar.children[day - 1];
+    if (opened) { opened.focus({ preventScroll: true }); sparkle(opened); }
+    setTimeout(() => {
+      opening = false;
+      showTea(tea, day);
+    }, 650);
+  }, 220);
 }
 
-let lastFocused = null;
+/* ---------- Effekte ---------- */
 
-function showTea(tea){
+function sparkle(tile) {
+  const rect  = tile.getBoundingClientRect();
+  const burst = el('div', 'burst');
+  burst.style.left = `${rect.left + rect.width / 2}px`;
+  burst.style.top  = `${rect.top + rect.height / 2}px`;
+  const count = 18;
+  for (let i = 0; i < count; i++) {
+    const spark = el('span', 'spark');
+    spark.style.setProperty('--a', `${(360 / count) * i + Math.random() * 14}deg`);
+    spark.style.setProperty('--d', `${70 + Math.random() * 70}px`);
+    spark.style.setProperty('--s', `${5 + Math.random() * 6}px`);
+    if (i % 3 === 0) spark.classList.add('spark-alt');
+    burst.appendChild(spark);
+  }
+  document.body.appendChild(burst);
+  setTimeout(() => burst.remove(), 1000);
+}
+
+function makeSnow() {
+  if (reducedMotion) return;
+  const count = window.innerWidth < 600 ? 28 : 55;
+  for (let i = 0; i < count; i++) {
+    const flake = el('span', 'flake');
+    const size = 2 + Math.random() * 6;
+    flake.style.setProperty('--x', `${Math.random() * 100}%`);
+    flake.style.setProperty('--size', `${size}px`);
+    flake.style.setProperty('--dur', `${9 + Math.random() * 12 + (8 - size)}s`);
+    flake.style.setProperty('--delay', `${-Math.random() * 20}s`);
+    flake.style.setProperty('--drift', `${-40 + Math.random() * 80}px`);
+    flake.style.setProperty('--o', `${0.35 + Math.random() * 0.55}`);
+    snowEl.appendChild(flake);
+  }
+}
+makeSnow();
+
+let toastTimer = null;
+function toast(message) {
+  toastEl.textContent = message;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3200);
+}
+
+/* ---------- Countdown ---------- */
+
+function pad(n) { return String(n).padStart(2, '0'); }
+
+function formatDuration(ms) {
+  const total = Math.max(0, Math.ceil(ms / 1000));
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  return `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+
+function countdownText() {
+  if (TEST_MODE) return 'Testmodus aktiv';
+
+  const now   = new Date();
+  const start = new Date(CALENDAR_YEAR, 11, 1);
+  const last  = new Date(CALENDAR_YEAR, 11, 24);
+
+  if (now < start) {
+    const ms = start - now;
+    const days = Math.floor(ms / 86400000);
+    if (days >= 2) return `Erstes Türchen in ${days} Tagen`;
+    return `Erstes Türchen in ${formatDuration(ms)}`;
+  }
+  if (now < last) {
+    const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    return `Nächstes Türchen in ${formatDuration(midnight - now)}`;
+  }
+  if (now.getFullYear() === CALENDAR_YEAR) return 'Frohe Weihnachten!';
+  return 'Alle Türchen sind offen';
+}
+
+function updateCountdown() {
+  countdownEl.textContent = countdownText();
+  countdownEl.hidden = false;
+  // Um Mitternacht wird ein neues Türchen frei – Kalender neu zeichnen
+  if (!opening && openableCount() !== renderedOpenable) renderCalendar();
+}
+
+/* ---------- Modal ---------- */
+
+let lastDay = null;
+
+function showTea(tea, day){
+  teaDay.textContent         = day;
   teaName.textContent        = tea.name || '';
   // Altes Bild sofort entfernen, damit nicht kurz der vorherige Tee zu sehen ist
   teaImage.removeAttribute('src');
   if (tea.image) teaImage.src = tea.image;
-  teaImage.hidden            = !tea.image;
+  teaImage.parentElement.hidden = !tea.image;
   teaImage.alt               = tea.name || '';
   teaDescription.textContent = tea.description || '';
-  teaPreparation.textContent = tea.preparation || '';
-  teaExpiry.textContent      = tea.expiry || '';
+  teaPreparation.textContent = tea.preparation || '–';
+  teaExpiry.textContent      = tea.expiry || '–';
 
-  // renderCalendar() ersetzt die Türchen – darum den Tag merken, nicht das Element
-  const active = document.activeElement;
-  lastFocused = active && active.classList.contains('door')
-    ? Array.from(calendar.children).indexOf(active)
-    : null;
-
+  lastDay = day;
   modal.classList.remove('hidden');
+  document.body.classList.add('modal-open');
   modalClose.focus();
 }
 
 function closeModal(){
   if (modal.classList.contains('hidden')) return;
   modal.classList.add('hidden');
-  if (lastFocused !== null && calendar.children[lastFocused]) {
-    calendar.children[lastFocused].focus();
-  }
-  lastFocused = null;
+  document.body.classList.remove('modal-open');
+  // renderCalendar() ersetzt die Türchen – darum über den Tag wiederfinden
+  const tile = lastDay ? calendar.children[lastDay - 1] : null;
+  if (tile) tile.focus();
+  lastDay = null;
 }
 
 modalClose.addEventListener('click', closeModal);

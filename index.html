@@ -7,64 +7,70 @@
   <meta name="robots" content="noindex, nofollow" />
   <meta name="referrer" content="no-referrer" />
   <!-- Nur eigene Dateien laden: kein fremder Code, keine fremden Server -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'" />
+  <meta name="theme-color" content="#0c1f24" />
   <title>Tee Adventskalender</title>
-  <link rel="stylesheet" href="style.css?v=11.2" />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="style.css?v=12.0" />
 </head>
 <body>
   <div class="page-bg">
     <div class="background-image" aria-hidden="true"></div>
-    <div class="snow" aria-hidden="true">
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-      <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
-    </div>
+    <div id="snow" class="snow" aria-hidden="true"></div>
 
     <header class="header">
-      <h1 class="title">Tee Adventskalender</h1>
+      <p class="eyebrow">Advent <span id="calYear"></span></p>
+      <h1 class="title">Tee <em>Adventskalender</em></h1>
       <p class="subtitle">24 Tees nur für dich!</p>
+
+      <div class="status">
+        <div class="pill">
+          <span id="progressText">0 von 24 geöffnet</span>
+          <span class="bar" aria-hidden="true"><span id="progressBar" class="bar-fill"></span></span>
+        </div>
+        <div id="countdown" class="pill pill-accent" hidden></div>
+      </div>
     </header>
 
     <main class="container">
       <section id="calendar" class="calendar" aria-label="Adventskalender"></section>
     </main>
 
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
     <!-- Modal -->
     <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="teaName">
       <div class="modal-box">
         <button id="modalClose" class="modal-close" type="button" aria-label="Schliessen">&times;</button>
+        <div class="modal-media">
+          <img id="teaImage" class="modal-image" alt="" />
+        </div>
         <div class="modal-content">
+          <p class="modal-eyebrow">Türchen <span id="teaDay"></span></p>
           <h2 id="teaName" class="modal-title"></h2>
-          <div class="modal-body">
-            <!-- Bild -->
-            <img id="teaImage" class="modal-image" alt="" />
-            <!-- Zubereitung -->
-            <div class="modal-section modal-prep">
-              <h3>Zubereitung</h3>
-              <p id="teaPreparation"></p>
+          <p id="teaDescription" class="modal-desc"></p>
+          <dl class="facts">
+            <div class="fact">
+              <dt>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17"/><path d="M8 5c-1-1.500 1-2 0-3.500M12.500 5c-1-1.500 1-2 0-3.500"/></svg>
+                Zubereitung
+              </dt>
+              <dd id="teaPreparation"></dd>
             </div>
-            <!-- Haltbarkeit -->
-            <div class="modal-section modal-expiry">
-              <h3>Haltbarkeit</h3>
-              <p id="teaExpiry"></p>
+            <div class="fact">
+              <dt>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
+                Haltbar bis
+              </dt>
+              <dd id="teaExpiry"></dd>
             </div>
-            <!-- Beschreibungsbox -->
-            <div class="modal-section modal-desc-box">
-              <p id="teaDescription" class="modal-desc"></p>
-            </div>
-          </div>
+          </dl>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="script.js?v=11.2"></script>
+  <script src="script.js?v=12.0"></script>
 </body>
 </html>
