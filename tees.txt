@@ -1,0 +1,188 @@
+# ============================================================
+#  TEE ADVENTSKALENDER – HIER DIE TEES EINTRAGEN
+# ============================================================
+#
+#  So funktioniert es:
+#  - Jedes Türchen hat einen Block, der mit "Türchen 1", "Türchen 2" usw. beginnt.
+#  - Darunter stehen die Angaben, immer als  "Feld: Text".
+#  - Einfach den Text hinter dem Doppelpunkt überschreiben.
+#  - Zeilen, die mit # beginnen, sind Notizen und werden ignoriert.
+#
+#  Die Felder:
+#    Name:          Name des Tees
+#    Beschreibung:  kurzer Text zum Tee
+#    Zubereitung:   z. B. "2 EL auf 1 l heisses Wasser, 5–8 min"
+#    Haltbar bis:   z. B. "31.01.2028"
+#    Bild:          Dateiname aus dem Ordner "images"
+#                   (weglassen = Tee01_V1.webp, Tee02_V1.webp usw.)
+#
+#  Ein Feld darf leer bleiben. Die Reihenfolge der Blöcke ist egal.
+# ============================================================
+
+Türchen 1
+Name: Original Berner Bären Tee
+Beschreibung: Milde Früchte-Kräuter Komposition mit dezentem Aprikosen-Minze-Geschmack.
+Zubereitung: 3 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 06.06.2027
+Bild: Tee01_V1.webp
+
+Türchen 2
+Name: Marrakesch
+Beschreibung: Thé à la menthe. Belebender und herber Gunpowder-Tee mit erfrischender Nanaminze.
+Zubereitung: 1 TL auf 2 dl heisses Wasser, 2 min
+Haltbar bis: 14.10.2027
+Bild: Tee02_V1.webp
+
+Türchen 3
+Name: Orange-Ingwer
+Beschreibung: Ein milder Früchtetee mit Orange-Ingwer-Geschmack. Eignet sich hervorragend für Eistee!
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 08.10.2027
+Bild: Tee03_V1.webp
+
+Türchen 4
+Name: Green Chai
+Beschreibung: Der würzige Klassiker aus Indien mit mildem Grüntee.
+Zubereitung: 1 TL auf 2 dl heisses Wasser, 4–6 min, wird mit Milch getrunken
+Haltbar bis: 31.01.2027
+Bild: Tee04_V1.webp
+
+Türchen 5
+Name: Wildfrüchte
+Beschreibung: Früchtemischung mit Brombeergeschmack.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 31.01.2027
+Bild: Tee05_V1.webp
+
+Türchen 6
+Name: Durstlöscher Eistee
+Beschreibung: Klassische Kräutermischung für Eistee, mit wenig Schwarztee und erfrischendem Zitronengras.
+Zubereitung: 3 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 31.01.2027
+Bild: Tee06_V1.webp
+
+Türchen 7
+Name: Pfirsich-Eistee
+Beschreibung: Eistee-Klassiker mit dem fruchtigen Geschmack reifer Pfirsiche und entkoffeiniertem Schwarztee.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 04.02.2027
+Bild: Tee07_V1.webp
+
+Türchen 8
+Name: Lotusblüte
+Beschreibung: Milder Chinatee mit Jasmin-, Rosen- und Orangenblüten. Duftend blumiges Aroma.
+Zubereitung: 4 TL auf 1 l heisses Wasser, 3–4 min
+Haltbar bis: 20.09.2027
+Bild: Tee08_V1.webp
+
+Türchen 9
+Name: Inseltraum
+Beschreibung: Tropische Mischung mit Mango, Maracuja und Pfirsichgeschmack.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 22.09.2027
+Bild: Tee09_V1.webp
+
+Türchen 10
+Name: Honeybush
+Beschreibung: Für die Zubereitung eines milden, koffeinfreien Tees.
+Zubereitung: 2 TL auf 2 dl heisses Wasser, 5–8 min
+Haltbar bis: 15.01.2027
+Bild: Tee10_V1.webp
+
+Türchen 11
+Name: Glücks-Tee
+Beschreibung: Unsere liebliche Früchtemischung, etwas Glück kann man immer gebrauchen!
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 31.01.2027
+Bild: Tee11_V1.webp
+
+Türchen 12
+Name: Limette-Ingwer
+Beschreibung: Milder Sencha, kombiniert mit spritzigen Zitrusschalen und würzig-frischem, süsslichen Ingwer.
+Zubereitung: 1 TL auf 2 dl heisses Wasser, 2–3 min
+Haltbar bis: 14.04.2027
+Bild: Tee12_V1.webp
+
+Türchen 13
+Name: Fenchel
+Beschreibung: Hocharomatischer Fenchel-Genuss für wohltuende Tees, mit einer leichten Anis-Note und einer dezenten Süsse.
+Zubereitung: 2 TL auf 2 dl heisses Wasser, 5–8 min
+Haltbar bis: 31.01.2027
+Bild: Tee13_V1.webp
+
+Türchen 14
+Name: Cold Brew Honigmelone
+Beschreibung: Eiskalter und fruchtiger Eisteegenuss! Ohne Abkühlzeit, jedoch mit viel gutem Geschmack.
+Zubereitung: 2 EL auf 1 l eiskaltes Wasser, 30 min
+Haltbar bis: 11.03.2027
+Bild: Tee14_V1.webp
+
+Türchen 15
+Name: Pfefferminze
+Beschreibung: Wohlduftende Pfefferminze aus dem Napfgebiet, sorgfältig geerntet und schonend verarbeitet.
+Zubereitung: 2 TL auf 2 dl heisses Wasser, 5–8 min
+Haltbar bis: 31.01.2027
+Bild: Tee15_V1.webp
+
+Türchen 16
+Name: Apfel Zimt
+Beschreibung: Apfel und Zimt, der Inbegriff für eine besinnliche Winterzeit. Sehr milde und helle Früchtemischung.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 02.10.2027
+Bild: Tee16_V1.webp
+
+Türchen 17
+Name: Raclette Tee
+Beschreibung: Ausgewogene, herb-fruchtige Mischung für Raclette und natürlich auch Fondue oder andere Käsegerichte.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 31.01.2027
+Bild: Tee17_V1.webp
+
+Türchen 18
+Name: Yuzu Twist
+Beschreibung: Milder Früchtetee mit frisch-fruchtigem Yuzu Geschmack. Auch als Eistee ein Genuss.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 09.04.2027
+Bild: Tee18_V1.webp
+
+Türchen 19
+Name: Indian Chai
+Beschreibung: Das indische Nationalgetränk. Kräftiger Schwarztee mit würzigen Aromen, anregendem Duft und wohltuendem Geschmack.
+Zubereitung: 4 TL auf 1 l heisses Wasser, 4–6 min, wird mit Milch getrunken
+Haltbar bis: 31.01.2028
+Bild: Tee19_V1.webp
+
+Türchen 20
+Name: Tulsi Orange-Ingwer
+Beschreibung: Kräutermischung auf Basis von indischem Basilikum, mit Ingwer-Orange-Geschmack.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 04.02.2027
+Bild: Tee20_V1.webp
+
+Türchen 21
+Name: Sommernachts Traum
+Beschreibung: Ein Sommermärchen mit frisch-fruchtigem Erdbeer-, Rhabarbergeschmack.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 16.10.2027
+Bild: Tee21_V1.webp
+
+Türchen 22
+Name: Ewiges Leben
+Beschreibung: Milde Grünteemischung mit Aprikosen-Jasmin-Geschmack.
+Zubereitung: 1 TL auf 2 dl heisses Wasser, 2–3 min
+Haltbar bis: 13.08.2026
+Bild: Tee22_V1.webp
+
+Türchen 23
+Name: Guete Morge
+Beschreibung: Eine belebende Mischung mit minzigem Geschmack für einen frischen, schwungvollen Start in den Tag.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 26.05.2027
+Bild: Tee23_V1.webp
+
+Türchen 24
+Name: Sternstunde
+Beschreibung: Milde Früchtemischung mit dem süssen, verführerischen Geschmack gebrannter Mandeln und Zimt.
+Zubereitung: 2 EL auf 1 l heisses Wasser, 5–8 min
+Haltbar bis: 31.01.2028
+Bild: Tee24_V1.webp

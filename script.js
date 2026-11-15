@@ -23,7 +23,6 @@ const TEST_DATE = '2026-12-16'; // Jahr-Monat-Tag
 
 const STORAGE_KEY        = TEST_MODE ? 'openedDoors-test' : `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
-const VERSION            = '12.8';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
@@ -74,14 +73,67 @@ let openedDoors = loadOpenedDoors();
 /* ---------- Daten laden ---------- */
 
 let teas = [];
-fetch(`teas.json?v=${VERSION}`)
+
+// Liest tees.txt: Blöcke "Türchen N" mit Zeilen "Feld: Text".
+// Bewusst nachsichtig bei Gross-/Kleinschreibung und Leerzeichen.
+const FIELD_NAMES = {
+  'name': 'name',
+  'beschreibung': 'description',
+  'zubereitung': 'preparation',
+  'haltbar bis': 'expiry',
+  'haltbarkeit': 'expiry',
+  'bild': 'image',
+};
+
+function parseTeas(text) {
+  const result = [];
+  let tea = null;
+  let lastField = null;
+
+  for (const rawLine of text.replace(/^\uFEFF/, '').split(/\r?\n/)) {
+    const line = rawLine.trim();
+    if (!line || line.startsWith('#')) continue;
+
+    const header = line.match(/^t(?:ü|ue)rchen\s*(\d+)\s*:?$/i);
+    if (header) {
+      tea = { id: Number(header[1]) };
+      lastField = null;
+      result.push(tea);
+      continue;
+    }
+    if (!tea) continue;
+
+    const colon = line.indexOf(':');
+    const field = colon > 0 ? FIELD_NAMES[line.slice(0, colon).trim().toLowerCase()] : undefined;
+    if (field) {
+      tea[field] = line.slice(colon + 1).trim();
+      lastField = field;
+    } else if (lastField) {
+      // Zeile ohne bekanntes Feld: gehört noch zum vorherigen Text
+      tea[lastField] = `${tea[lastField]} ${line}`.trim();
+    }
+  }
+
+  for (const entry of result) {
+    // Bild: nur der Dateiname wird angegeben; ohne Angabe gilt TeeNN_V1.webp
+    const file = entry.image || `Tee${String(entry.id).padStart(2, '0')}_V1.webp`;
+    entry.image = file.includes('/') ? file : `images/${file}`;
+  }
+  return result.filter(entry => entry.id >= 1 && entry.id <= 24);
+}
+
+// cache: 'no-cache' – Änderungen an tees.txt sind sofort sichtbar
+fetch('tees.txt', { cache: 'no-cache' })
   .then(res => {
-    if(!res.ok) throw new Error('teas.json konnte nicht geladen werden');
-    return res.json();
+    if(!res.ok) throw new Error('tees.txt konnte nicht geladen werden');
+    return res.text();
   })
-  .then(data => {
-    if (!Array.isArray(data)) throw new Error('teas.json hat ein unerwartetes Format');
-    teas = data;
+  .then(text => {
+    teas = parseTeas(text);
+    if (teas.length === 0) throw new Error('tees.txt enthält keine Türchen');
+    const missing = [];
+    for (let day = 1; day <= 24; day++) if (!teas.some(t => t.id === day)) missing.push(day);
+    if (missing.length) console.warn('In tees.txt fehlen die Türchen:', missing.join(', '));
     renderCalendar();
     updateCountdown();
     setInterval(updateCountdown, 1000);
