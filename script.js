@@ -23,7 +23,7 @@ const TEST_DATE = '2026-12-10'; // Jahr-Monat-Tag
 
 const STORAGE_KEY        = TEST_MODE ? 'openedDoors-test' : `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
-const VERSION            = '12.5';
+const VERSION            = '12.6';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
@@ -478,6 +478,10 @@ function updateCountdown() {
 
 let lastDay = null;
 
+let usingKeyboard = false;
+document.addEventListener('keydown', () => { usingKeyboard = true; }, true);
+document.addEventListener('pointerdown', () => { usingKeyboard = false; }, true);
+
 function showTea(tea, day){
   teaDay.textContent         = day;
   teaName.textContent        = tea.name || '';
@@ -501,7 +505,10 @@ function closeModal(){
   modal.classList.add('hidden');
   // renderCalendar() ersetzt die Türchen – darum über den Tag wiederfinden
   const tile = lastDay ? calendar.children[lastDay - 1] : null;
-  if (tile) tile.focus({ preventScroll: true });
+  // Fokus nur bei Tastaturbedienung zurück aufs Türchen setzen – bei
+  // Maus und Finger bliebe sonst ein goldener Fokusrahmen stehen
+  if (tile && usingKeyboard) tile.focus({ preventScroll: true });
+  else if (document.activeElement) document.activeElement.blur();
   lastDay = null;
 }
 

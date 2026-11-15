@@ -154,8 +154,8 @@ body{
   background:linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.65) 50%, transparent 65%);
   transform:translateX(-120%); transition:transform 900ms cubic-bezier(.2,.8,.2,1); pointer-events:none;
 }
-.door.openable:hover{ transform:translateY(-6px) rotate(-1.2deg); box-shadow:0 22px 40px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,255,255,0.5); }
-.door.openable:hover::after{ transform:translateX(120%); }
+@media (hover:hover){ .door.openable:hover{ transform:translateY(-6px) rotate(-1.2deg); box-shadow:0 22px 40px rgba(0,0,0,0.38), inset 0 0 0 1px rgba(255,255,255,0.5); } }
+@media (hover:hover){ .door.openable:hover::after{ transform:translateX(120%); } }
 .door.openable:active{ transform:translateY(-2px) scale(0.98); }
 
 /* heute */
@@ -185,8 +185,8 @@ body{
   content:""; position:absolute; inset:0; pointer-events:none;
   background:linear-gradient(180deg, rgba(10,26,31,0.0) 45%, rgba(10,26,31,0.82) 100%);
 }
-.door.opened:hover{ transform:translateY(-6px); box-shadow:0 22px 40px rgba(0,0,0,0.42), 0 0 0 1px rgba(242,184,75,0.55); }
-.door.opened:hover img{ transform:scale(1.08); }
+@media (hover:hover){ .door.opened:hover{ transform:translateY(-6px); box-shadow:0 22px 40px rgba(0,0,0,0.42), 0 0 0 1px rgba(242,184,75,0.55); } }
+@media (hover:hover){ .door.opened:hover img{ transform:scale(1.08); } }
 .door.opened.today{ box-shadow:0 10px 24px rgba(0,0,0,0.3), 0 0 0 2px var(--gold); }
 .day-label{
   position:absolute; top:8px; left:8px; z-index:1;
@@ -203,7 +203,7 @@ body{
 
 /* Animationen der Türchen */
 .door.closing{ animation:flipOut 220ms ease-in forwards; }
-.door.just-opened{ animation:flipIn 600ms cubic-bezier(.2,.9,.25,1.15) both; }
+.door.just-opened{ animation:flipIn 600ms cubic-bezier(.2,.9,.25,1.15) backwards; }
 .door.shake{ animation:shake 420ms ease; }
 @keyframes flipOut{ to{ transform:rotateY(90deg) scale(1.06); } }
 @keyframes flipIn{
@@ -275,7 +275,7 @@ body{
   font-size:1.5rem; line-height:1; cursor:pointer;
   transition:background 200ms ease, transform 200ms ease;
 }
-.modal-close:hover{ background:rgba(28,42,43,0.16); transform:rotate(90deg); }
+@media (hover:hover){ .modal-close:hover{ background:rgba(28,42,43,0.16); transform:rotate(90deg); } }
 .modal-close:focus-visible{ outline:3px solid var(--terra); outline-offset:2px; }
 
 .modal-media{ position:relative; min-height:340px; background:var(--cream-2); }
