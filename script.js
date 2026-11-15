@@ -23,7 +23,7 @@ const TEST_DATE = '2026-12-10'; // Jahr-Monat-Tag
 
 const STORAGE_KEY        = TEST_MODE ? 'openedDoors-test' : `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
-const VERSION            = '12.4';
+const VERSION            = '12.5';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
@@ -260,65 +260,80 @@ function el(tag, className, text) {
   return node;
 }
 
-function renderCalendar(justOpened){
-  const today = todaysDoor();
-  const tiles = [];
+function buildTile(day, today, justOpened){
+  // <button>, damit die Türchen auch per Tastatur bedienbar sind
+  const tile = el('button', `door size-${doorSizes[day - 1].name}`);
+  tile.type = 'button';
 
-  for(let day=1; day<=24; day++){
-    // <button>, damit die Türchen auch per Tastatur bedienbar sind
-    const tile = el('button', `door size-${doorSizes[day - 1].name}`);
-    tile.type = 'button';
+  const tea = teas.find(t => Number(t.id) === day);
 
-    const tea = teas.find(t => Number(t.id) === day);
+  const isOpenable = canOpen(day);
+  const isOpened   = isOpenable && openedDoors.includes(day);
 
-    const isOpenable = canOpen(day);
-    const isOpened   = isOpenable && openedDoors.includes(day);
+  if (day === today) tile.classList.add('today');
+  if (day === justOpened) tile.classList.add('just-opened');
 
-    if (day === today) tile.classList.add('today');
-    if (day === justOpened) tile.classList.add('just-opened');
-
-    if(isOpened){
-      tile.classList.add('opened');
-      tile.setAttribute('aria-label', `Türchen ${day}${tea && tea.name ? ': ' + tea.name : ''}`);
-      if(tea && tea.image){
-        const img = el('img');
-        img.src = tea.image;
-        img.alt = '';
-        img.loading = 'lazy';
-        img.decoding = 'async';
-        tile.appendChild(img);
-        tile.appendChild(el('span', 'day-label', day));
-        if (tea.name) tile.appendChild(el('span', 'door-name', tea.name));
-      } else {
-        tile.appendChild(el('span', 'door-num', day));
-      }
-      tile.addEventListener('click', () => {
-        if(tea) showTea(tea, day);
-      });
-
+  if(isOpened){
+    tile.classList.add('opened');
+    tile.setAttribute('aria-label', `Türchen ${day}${tea && tea.name ? ': ' + tea.name : ''}`);
+    if(tea && tea.image){
+      const img = el('img');
+      img.src = tea.image;
+      img.alt = '';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      tile.appendChild(img);
+      tile.appendChild(el('span', 'day-label', day));
+      if (tea.name) tile.appendChild(el('span', 'door-name', tea.name));
     } else {
       tile.appendChild(el('span', 'door-num', day));
-      if(!isOpenable){
-        tile.classList.add('locked');
-        // aria-disabled statt disabled: so kann ein Klick eine Rückmeldung geben
-        tile.setAttribute('aria-disabled', 'true');
-        tile.setAttribute('aria-label', `Türchen ${day} (noch verschlossen)`);
-        tile.appendChild(el('span', 'door-lock'));
-        tile.addEventListener('click', () => lockedFeedback(tile, day));
-      } else {
-        tile.classList.add('openable');
-        tile.setAttribute('aria-label', `Türchen ${day} öffnen`);
-        if (day === today) tile.appendChild(el('span', 'door-badge', 'Heute'));
-        tile.addEventListener('click', () => openDoor(day, tea, tile));
-      }
     }
-    tiles.push(tile);
+    tile.addEventListener('click', () => {
+      if(tea) showTea(tea, day);
+    });
+
+  } else {
+    tile.appendChild(el('span', 'door-num', day));
+    if(!isOpenable){
+      tile.classList.add('locked');
+      // aria-disabled statt disabled: so kann ein Klick eine Rückmeldung geben
+      tile.setAttribute('aria-disabled', 'true');
+      tile.setAttribute('aria-label', `Türchen ${day} (noch verschlossen)`);
+      tile.appendChild(el('span', 'door-lock'));
+      tile.addEventListener('click', () => lockedFeedback(tile, day));
+    } else {
+      tile.classList.add('openable');
+      tile.setAttribute('aria-label', `Türchen ${day} öffnen`);
+      if (day === today) tile.appendChild(el('span', 'door-badge', 'Heute'));
+      tile.addEventListener('click', () => openDoor(day, tea, tile));
+    }
   }
+  return tile;
+}
+
+function renderCalendar(){
+  const today = todaysDoor();
+  const tiles = [];
+  for(let day=1; day<=24; day++) tiles.push(buildTile(day, today));
 
   calendar.replaceChildren(...tiles);
   applyLayout();
   renderedOpenable = openableCount();
   updateProgress();
+}
+
+// Tauscht nur ein einzelnes Türchen aus. Der Rest der Seite bleibt
+// unberührt, damit sich beim Öffnen nichts verschiebt (iPhone/Safari
+// springt sonst an den Seitenanfang).
+function replaceTile(day, justOpened){
+  const old = calendar.children[day - 1];
+  if (!old) { renderCalendar(); return null; }
+  const tile = buildTile(day, todaysDoor(), justOpened);
+  tile.style.gridColumn = old.style.gridColumn;
+  tile.style.gridRow    = old.style.gridRow;
+  calendar.replaceChild(tile, old);
+  updateProgress();
+  return tile;
 }
 
 function updateProgress() {
@@ -353,7 +368,7 @@ function openDoor(day, tea, tile){
   }
 
   if(reducedMotion){
-    renderCalendar();
+    replaceTile(day);
     showTea(tea, day);
     return;
   }
@@ -362,9 +377,13 @@ function openDoor(day, tea, tile){
   opening = true;
   tile.classList.add('closing');
   setTimeout(() => {
-    renderCalendar(day);
-    const opened = calendar.children[day - 1];
-    if (opened) { opened.focus({ preventScroll: true }); sparkle(opened); }
+    // Scroll-Position merken und notfalls wiederherstellen
+    const x = window.scrollX, y = window.scrollY;
+    const opened = replaceTile(day, day);
+    if (opened) sparkle(opened);
+    const keepScroll = () => { if (window.scrollY !== y) window.scrollTo(x, y); };
+    keepScroll();
+    requestAnimationFrame(keepScroll);
     setTimeout(() => {
       opening = false;
       showTea(tea, day);
