@@ -30,7 +30,6 @@
 }
 
 *{box-sizing:border-box}
-html,body{height:100%}
 body{
   margin:0;
   font-family:var(--sans);
@@ -38,7 +37,6 @@ body{
   color:var(--cream);
   -webkit-font-smoothing:antialiased;
 }
-body.modal-open{ overflow:hidden; }
 
 /* ---------- Hintergrund & Schnee ---------- */
 .page-bg{ position:relative; min-height:100vh; overflow:hidden; padding-bottom:56px; }
@@ -258,10 +256,14 @@ body.modal-open{ overflow:hidden; }
   background:rgba(6,16,19,0.72);
   backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
   animation:fadeIn 220ms ease;
+  /* Seite dahinter nicht mitscrollen – ohne overflow:hidden am body,
+     das auf dem iPhone die Seite nach oben springen lässt */
+  overscroll-behavior:contain; touch-action:none;
 }
 .modal.hidden{ display:none; }
 .modal-box{
   position:relative; width:100%; max-width:820px; max-height:100%; overflow-y:auto;
+  overscroll-behavior:contain; touch-action:pan-y;
   display:grid; grid-template-columns:minmax(0, 46%) minmax(0, 1fr);
   background:var(--cream); color:var(--ink);
   border-radius:24px; box-shadow:0 30px 80px rgba(0,0,0,0.55);

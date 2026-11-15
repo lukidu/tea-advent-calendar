@@ -17,7 +17,7 @@ const TEST_DAY = 24;
 
 const STORAGE_KEY        = `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
-const VERSION            = '12.1';
+const VERSION            = '12.2';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
@@ -460,17 +460,16 @@ function showTea(tea, day){
 
   lastDay = day;
   modal.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-  modalClose.focus();
+  // preventScroll: die Seite soll beim Öffnen und Schliessen nicht springen
+  modalClose.focus({ preventScroll: true });
 }
 
 function closeModal(){
   if (modal.classList.contains('hidden')) return;
   modal.classList.add('hidden');
-  document.body.classList.remove('modal-open');
   // renderCalendar() ersetzt die Türchen – darum über den Tag wiederfinden
   const tile = lastDay ? calendar.children[lastDay - 1] : null;
-  if (tile) tile.focus();
+  if (tile) tile.focus({ preventScroll: true });
   lastDay = null;
 }
 
