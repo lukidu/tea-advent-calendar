@@ -17,7 +17,7 @@ const TEST_DAY = 24;
 
 const STORAGE_KEY        = `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
-const VERSION            = '12.0';
+const VERSION            = '12.1';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
@@ -120,6 +120,120 @@ function openableCount() {
   return n;
 }
 
+/* ---------- Gemischte Anordnung ---------- */
+
+// Die Türchen sind wie bei einem echten Adventskalender durcheinander und
+// verschieden gross. Die Anordnung hängt nur vom Jahr ab: Sie ist bei jedem
+// Besuch gleich, aber jedes Jahr anders.
+// 2 grosse (2×2), 3 breite (2×1), 3 hohe (1×2) und 16 kleine Türchen
+// ergeben 36 Felder – das geht bei 6, 4 und 3 Spalten genau auf.
+const SIZES = [
+  ...Array(2).fill({ name: 'big',  w: 2, h: 2 }),
+  ...Array(3).fill({ name: 'wide', w: 2, h: 1 }),
+  ...Array(3).fill({ name: 'tall', w: 1, h: 2 }),
+  ...Array(16).fill({ name: 'small', w: 1, h: 1 }),
+];
+const TOTAL_CELLS = 36;
+
+// Zufallszahlen mit festem Startwert (mulberry32)
+function seededRandom(seed) {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6D2B79F5) >>> 0;
+    let t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function shuffled(list, random) {
+  const copy = list.slice();
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+const random = seededRandom(CALENDAR_YEAR);
+// Welches Türchen welche Grösse hat (Index = Tag - 1)
+const doorSizes = shuffled(SIZES, random);
+// Reihenfolge, in der die Türchen ins Raster gelegt werden
+const doorOrder = shuffled(Array.from({ length: 24 }, (_, i) => i + 1), random);
+
+// Legt alle Türchen lückenlos in ein Raster mit `cols` Spalten.
+// Ergebnis: pro Tag { col, row } (jeweils ab 1).
+function packDoors(cols) {
+  const rows = TOTAL_CELLS / cols;
+  const used = Array.from({ length: rows }, () => Array(cols).fill(false));
+  const placed = {};
+  const remaining = doorOrder.slice();
+
+  function fits(r, c, w, h) {
+    if (c + w > cols || r + h > rows) return false;
+    for (let y = r; y < r + h; y++)
+      for (let x = c; x < c + w; x++)
+        if (used[y][x]) return false;
+    return true;
+  }
+  function mark(r, c, w, h, value) {
+    for (let y = r; y < r + h; y++)
+      for (let x = c; x < c + w; x++) used[y][x] = value;
+  }
+  function place() {
+    if (remaining.length === 0) return true;
+    // erstes freies Feld suchen
+    let r = 0, c = 0;
+    outer: for (r = 0; r < rows; r++)
+      for (c = 0; c < cols; c++)
+        if (!used[r][c]) break outer;
+
+    const tried = new Set();
+    for (let i = 0; i < remaining.length; i++) {
+      const day = remaining[i];
+      const size = doorSizes[day - 1];
+      if (tried.has(size.name)) continue; // gleiche Grösse passt hier auch nicht
+      tried.add(size.name);
+      if (!fits(r, c, size.w, size.h)) continue;
+      mark(r, c, size.w, size.h, true);
+      remaining.splice(i, 1);
+      placed[day] = { col: c + 1, row: r + 1 };
+      if (place()) return true;
+      remaining.splice(i, 0, day);
+      mark(r, c, size.w, size.h, false);
+    }
+    return false;
+  }
+
+  return place() ? placed : null;
+}
+
+const columnQueries = [
+  { cols: 3, query: window.matchMedia('(max-width:520px)') },
+  { cols: 4, query: window.matchMedia('(max-width:900px)') },
+];
+function currentColumns() {
+  const match = columnQueries.find(entry => entry.query.matches);
+  return match ? match.cols : 6;
+}
+
+const layouts = {};
+function applyLayout() {
+  const cols = currentColumns();
+  if (!(cols in layouts)) layouts[cols] = packDoors(cols);
+  const layout = layouts[cols];
+  Array.from(calendar.children).forEach((tile, index) => {
+    if (!tile.classList.contains('door')) return;
+    const size = doorSizes[index];
+    const pos  = layout && layout[index + 1];
+    // Ohne gültige Anordnung fliessen die Türchen einfach der Reihe nach
+    tile.style.gridColumn = pos ? `${pos.col} / span ${size.w}` : `span ${size.w}`;
+    tile.style.gridRow    = pos ? `${pos.row} / span ${size.h}` : `span ${size.h}`;
+  });
+}
+columnQueries.forEach(entry => entry.query.addEventListener('change', applyLayout));
+
 /* ---------- Kalender ---------- */
 
 let renderedOpenable = -1;
@@ -137,7 +251,7 @@ function renderCalendar(justOpened){
 
   for(let day=1; day<=24; day++){
     // <button>, damit die Türchen auch per Tastatur bedienbar sind
-    const tile = el('button', 'door');
+    const tile = el('button', `door size-${doorSizes[day - 1].name}`);
     tile.type = 'button';
 
     const tea = teas.find(t => Number(t.id) === day);
@@ -187,6 +301,7 @@ function renderCalendar(justOpened){
   }
 
   calendar.replaceChildren(...tiles);
+  applyLayout();
   renderedOpenable = openableCount();
   updateProgress();
 }
