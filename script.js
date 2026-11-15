@@ -18,12 +18,12 @@ const CALENDAR_YEAR = 2026;
 // den echten Kalender nicht.
 // WICHTIG: Vor dem Verschenken wieder auf false stellen!
 // ============================================================
-const TEST_MODE = true;
+const TEST_MODE = false;
 const TEST_DATE = '2026-12-16'; // Jahr-Monat-Tag
 
 const STORAGE_KEY        = TEST_MODE ? 'openedDoors-test' : `openedDoors-${CALENDAR_YEAR}`;
 const LEGACY_STORAGE_KEY = 'openedDoors'; // alter Speicherort (Kalender 2025)
-const VERSION            = '12.7';
+const VERSION            = '12.8';
 
 const calendar      = document.getElementById('calendar');
 const modal         = document.getElementById('modal');
